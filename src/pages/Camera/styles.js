@@ -4,15 +4,24 @@ import SearchImage from 'react-native-vector-icons/Ionicons';
 import Setting from 'react-native-vector-icons/Ionicons';
 import IconMI from 'react-native-vector-icons/Ionicons';
 import IconF from 'react-native-vector-icons/Ionicons';
+import { RNCamera } from 'react-native-camera';
+import { Dimensions } from 'react-native';
 
 export const Container = styled.View`
   flex: 1;
+
   background-color: ${({ theme }) => theme.bg};
+`;
+
+export const Camera = styled(RNCamera)`
+  flex: ${({ isDrawerOpen }) => (isDrawerOpen ? 1 : 0)};
+  justify-content: flex-end;
+  align-items: center;
 `;
 
 export const ViewCapture = styled.View`
   height: 110px;
-  width: 100%;
+  /* width: 100%; */
   flex-direction: row;
   align-items: center;
   justify-content: center;

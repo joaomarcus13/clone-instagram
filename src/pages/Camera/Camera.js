@@ -10,6 +10,7 @@ import {
   View,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Dimensions,
 } from 'react-native';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import testeimage from '../../assets/images/a.jpg';
@@ -17,6 +18,9 @@ import { RNCamera } from 'react-native-camera';
 import * as Styled from './styles';
 import ModalSendImage from '../../components/SendImage/SendImage';
 import { useNavigation } from '@react-navigation/native';
+import { useIsDrawerOpen } from '@react-navigation/drawer';
+
+// ...
 
 const PendingView = () => (
   <View
@@ -34,6 +38,7 @@ const PendingView = () => (
 
 export default function Explorer() {
   const navigation = useNavigation();
+  const isDrawerOpen = useIsDrawerOpen();
   const typesCamera = {
     front: RNCamera.Constants.Type.front,
     back: RNCamera.Constants.Type.back,
@@ -91,10 +96,12 @@ export default function Explorer() {
       {takedImage ? (
         <ModalSendImage image={takedImage} cancel={settakedImage} />
       ) : (
-        <RNCamera
+        <Styled.Camera
+          isDrawerOpen={isDrawerOpen}
           style={styles.preview}
           type={cameraType}
           flashMode={flash}
+          ratio={'4:4'}
           // pictureSize={'1000x800'}
           androidCameraPermissionOptions={{
             title: 'Permission to use camera',
@@ -148,7 +155,7 @@ export default function Explorer() {
               </>
             );
           }}
-        </RNCamera>
+        </Styled.Camera>
       )}
     </Styled.Container>
   );

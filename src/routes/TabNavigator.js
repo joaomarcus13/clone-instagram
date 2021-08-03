@@ -5,13 +5,15 @@ import { NavigationContainer } from '@react-navigation/native';
 import Feed from '../pages/Feed/Feed';
 import Explorer from '../pages/Explorer/Explorer';
 import Profile from '../pages/Profile/Profile';
-import IconHome from 'react-native-vector-icons/Foundation';
+// import IconHome from 'react-native-vector-icons/Foundation';
 import IconSearch from 'react-native-vector-icons/Ionicons';
 // import IconShop from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconShop from 'react-native-vector-icons/MaterialCommunityIcons';
 import iconReels from '../assets/icons/icons-reels.png';
 import testeperfil from '../assets/images/a.jpg';
 import Drawer from './DrawerNavigator';
+import Drawer2 from './DrawerTest';
+import Icons from '../style/icons';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,10 +33,16 @@ export default function Tabs() {
     >
       <Tab.Screen
         name="Feed"
-        component={Feed}
+        component={Drawer2}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <IconHome name="home" color={'white'} size={focused ? 29 : 28} />
+            // <IconHome name="home" color={'white'} size={focused ? 29 : 28} />
+            <Icons.Foundation
+              name="home"
+              color={'white'}
+              size={focused ? 29 : 28}
+            />
+            // <Icons.home />
           ),
         }}
       />
