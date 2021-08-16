@@ -3,6 +3,7 @@ import { TouchableWithoutFeedback as Touch } from 'react-native';
 import * as Styled from './styles';
 import logo from '../../assets/icons/instagram-logo-white.png';
 import { useNavigation } from '@react-navigation/native';
+import { nameIcons } from '../../style/icons';
 
 export default function HeaderComponent() {
   const navigation = useNavigation();
@@ -16,21 +17,21 @@ export default function HeaderComponent() {
             navigation.navigate('NewPost');
           }}
         >
-          <Styled.IconAddPost name="plus-square-o" />
+          <Styled.Icons.AddPost name={nameIcons.addPost} />
         </Touch>
         <Touch
           onPress={() => {
             navigation.navigate('Activity');
           }}
         >
-          <Styled.IconActivity name="hearto" />
+          <Styled.Icons.Activity name={nameIcons.heart} />
         </Touch>
         <Touch
           onPress={() => {
-            navigation.navigate('Chat');
+            navigation.navigate('StackChat');
           }}
         >
-          <Styled.IconMessage name="message-circle" />
+          <Styled.Icons.Message name={nameIcons.message2} />
         </Touch>
       </Styled.AreaIcons>
     </Styled.Header>

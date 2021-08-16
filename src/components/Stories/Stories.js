@@ -1,22 +1,13 @@
 import React from 'react';
 import * as Styled from './styles';
 import { FlatList } from 'react-native';
+import { linearGradient } from '../../style/global';
 import teste from '../../assets/images/rm.jpg';
 
 export default function Story({ data }) {
-  console.log(data.img);
   return (
     <Styled.Story>
-      <Styled.Gradient
-        colors={[
-          '#cc2366',
-          '#bc1888',
-          '#dc2743',
-          '#e6683c',
-          '#f09433',
-          '#f3b940',
-        ]}
-      >
+      <Styled.Gradient colors={linearGradient}>
         <Styled.Border>
           <Styled.StoryImg source={data.img} />
         </Styled.Border>

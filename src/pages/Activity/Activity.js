@@ -13,15 +13,18 @@ import { data } from '../../util/datateste';
 import ListChat from '../../components/ListChat/ListChat';
 import { useNavigation } from '@react-navigation/native';
 import * as Styled from './styles';
+import * as GStyled from '../../style/global';
+import HeaderBack from '../../components/HeaderBack/HeaderBack';
 
 export default function Activity() {
   const navigation = useNavigation();
   const renderItem = ({ item }) => <ListChat item={item} />;
   return (
-    <Styled.Container>
-      <Styled.Header>
+    <GStyled.Container>
+      {/* <Styled.Header>
         <Styled.TextHeader>Activity</Styled.TextHeader>
-      </Styled.Header>
+      </Styled.Header> */}
+      <HeaderBack text="Activity" />
       <Search />
       <FlatList
         data={data}
@@ -29,7 +32,7 @@ export default function Activity() {
         renderItem={renderItem}
         showsVerticalScrollIndicator={false}
       />
-    </Styled.Container>
+    </GStyled.Container>
   );
 }
 

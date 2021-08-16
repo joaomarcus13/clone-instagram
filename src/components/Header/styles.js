@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
-import IconFA from 'react-native-vector-icons/FontAwesome';
-import IconAD from 'react-native-vector-icons/AntDesign';
-import IconF from 'react-native-vector-icons/Feather';
+import Icon from '../../style/icons';
 
 export const Header = styled.View`
   height: 53px;
@@ -24,15 +22,17 @@ export const AreaIcons = styled.View`
   justify-content: space-evenly;
 `;
 
-export const IconAddPost = styled(IconFA)`
-  font-size: 26px;
-  color: ${({ theme }) => theme.icon};
-`;
-export const IconActivity = styled(IconAD)`
-  font-size: 23px;
-  color: ${({ theme }) => theme.icon};
-`;
-export const IconMessage = styled(IconF)`
-  font-size: 25px;
-  color: ${({ theme }) => theme.icon};
-`;
+export const Icons = {
+  AddPost: styled(Icon.FontAwesome)`
+    font-size: 26px;
+    color: ${({ theme }) => theme.icon};
+  `,
+  Activity: styled(Icon.AntDesign)`
+    font-size: 23px;
+    color: ${({ theme }) => theme.icon};
+  `,
+  Message: styled(Icon.Feather)`
+    font-size: 25px;
+    color: ${({ theme }) => theme.icon};
+  `,
+};

@@ -1,43 +1,62 @@
-import React from 'react';
-import {
-  createStackNavigator,
-  TransitionPresets,
-  CardStyleInterpolators,
-  TransitionSpecs,
-} from '@react-navigation/stack';
-import { Easing } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './TabNavigator';
 import Camera from '../pages/Camera/Camera';
-import Chat from '../pages/Chat/Chat';
+
 import Activity from '../pages/Activity/Activity';
 import NewPost from '../pages/NewPost/NewPost';
 import { enableScreens } from 'react-native-screens';
 enableScreens();
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
-
-import Login from '../pages/Login/Login';
+import StackChat from './StackChat';
+import StackLogin from './StackLogin';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../store/actions/user';
+import auth from '@react-native-firebase/auth';
 
 const Stack = createNativeStackNavigator();
 
 export default function MyStack() {
-  const isLoggedIn = true;
+  const [initializing, setInitializing] = useState(true);
+  const [user, setUser] = useState();
+  const dispatch = useDispatch();
 
-  const config = {
-    animation: 'timing',
-    config: {
-      duration: 80,
-      easing: Easing.out(Easing.poly(5)),
+  // Handle user state changes
+  const onAuthStateChanged = useCallback(
+    (userAuth) => {
+      setUser(userAuth);
+      if (userAuth) {
+        console.log('user in stack onauthstate', userAuth);
+        dispatch(
+          login({
+            displayName: userAuth.displayName || '',
+            email: userAuth.email,
+            metadata: userAuth.metadata,
+            uid: userAuth.uid,
+            photoURL: userAuth.photoURL,
+          })
+        );
+      }
+      if (initializing) {
+        setInitializing(false);
+      }
     },
-  };
+    [initializing, dispatch]
+  );
 
-  const closeConfig = {
-    animation: 'timing',
-    config: {
-      duration: 80,
-      easing: Easing.in(Easing.linear),
-    },
-  };
+  console.log('user in stack', user);
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    console.log('usereffect');
+    return subscriber; // unsubscribe on unmount
+  }, [onAuthStateChanged, user]);
+
+  if (initializing) {
+    return null;
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -46,9 +65,9 @@ export default function MyStack() {
         }}
         headerMode={'none'}
       >
-        {isLoggedIn ? (
+        {user ? (
           <>
-            <Stack.Screen name="Home" component={TabNavigator} />
+            <Stack.Screen name="Tab" component={TabNavigator} />
             <Stack.Screen
               name="Camera"
               component={Camera}
@@ -63,8 +82,8 @@ export default function MyStack() {
               }}
             />
             <Stack.Screen
-              name="Chat"
-              component={Chat}
+              name="StackChat"
+              component={StackChat}
               options={{
                 stackAnimation: 'slide_from_right',
                 // transitionSpec: {
@@ -91,7 +110,7 @@ export default function MyStack() {
             />
           </>
         ) : (
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="StackLogin" component={StackLogin} />
         )}
       </Stack.Navigator>
     </NavigationContainer>

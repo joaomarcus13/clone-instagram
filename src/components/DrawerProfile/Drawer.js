@@ -8,6 +8,7 @@ import {
   DrawerItemList,
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
+import { nameIcons } from '../../style/icons';
 
 export default function Drawer({ navigation }) {
   return (
@@ -19,37 +20,49 @@ export default function Drawer({ navigation }) {
         <DrawerItem
           label="Archive"
           style={styles.item}
-          icon={({ color, size }) => <Styled.Icons.Settings name="gear" />}
+          icon={({ color, size }) => (
+            <Styled.Icons.Settings name={nameIcons.settings} />
+          )}
           labelStyle={styles.label}
         />
         <DrawerItem
           label="Your Activity"
           style={styles.item}
-          icon={({ color, size }) => <Styled.Icons.Settings name="gear" />}
+          icon={({ color, size }) => (
+            <Styled.Icons.Settings name={nameIcons.settings} />
+          )}
           labelStyle={styles.label}
         />
         <DrawerItem
           label="QR Code"
           style={styles.item}
-          icon={({ color, size }) => <Styled.Icons.Settings name="gear" />}
+          icon={({ color, size }) => (
+            <Styled.Icons.Settings name={nameIcons.settings} />
+          )}
           labelStyle={styles.label}
         />
         <DrawerItem
           label="Saved"
           style={styles.item}
-          icon={({ color, size }) => <Styled.Icons.Settings name="gear" />}
+          icon={({ color, size }) => (
+            <Styled.Icons.Settings name={nameIcons.settings} />
+          )}
           labelStyle={styles.label}
         />
         <DrawerItem
           label="Close Friends"
           style={styles.item}
-          icon={({ color, size }) => <Styled.Icons.Settings name="gear" />}
+          icon={({ color, size }) => (
+            <Styled.Icons.Settings name={nameIcons.settings} />
+          )}
           labelStyle={styles.label}
         />
         <DrawerItem
           label="Discover People"
           style={styles.item}
-          icon={({ color, size }) => <Styled.Icons.Settings name="gear" />}
+          icon={({ color, size }) => (
+            <Styled.Icons.Settings name={nameIcons.settings} />
+          )}
           labelStyle={styles.label}
         />
       </Styled.Items>
@@ -58,7 +71,9 @@ export default function Drawer({ navigation }) {
         <DrawerItem
           label="Settings"
           style={styles.item}
-          icon={({ color, size }) => <Styled.Icons.Settings name="gear" />}
+          icon={({ color, size }) => (
+            <Styled.Icons.Settings name={nameIcons.settings} />
+          )}
           labelStyle={styles.label}
           onPress={() => {
             navigation.navigate('Settings');

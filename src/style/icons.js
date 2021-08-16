@@ -18,6 +18,17 @@
 // };
 
 import Foundation from 'react-native-vector-icons/Foundation';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import Feather from 'react-native-vector-icons/Feather';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
+import Octicons from 'react-native-vector-icons/Octicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 import Messenger from '../assets/icons/messenger.svg';
 import Favorite from '../assets/icons/favorite.svg';
 import Comment from '../assets/icons/comment.svg';
@@ -26,6 +37,28 @@ import Logo from '../assets/icons/logo.svg';
 import Igtv from '../assets/icons/igtv.svg';
 import Save from '../assets/icons/save.svg';
 
+export const nameIcons = {
+  phone: 'phone',
+  video: 'videocam-outline',
+  back: 'arrowleft',
+  message: 'new-message',
+  settings: 'gear',
+  addPost: 'plus-square-o',
+  heart: 'hearto',
+  message2: 'message-circle',
+  camera: 'camera-outline',
+};
+
 export default {
   Foundation,
+  SimpleLineIcons,
+  Feather,
+  Ionicons,
+  AntDesign,
+  Entypo,
+  Octicons,
+  FontAwesome,
+  MaterialCommunityIcons,
+  Fontisto,
+  MaterialIcons,
 };

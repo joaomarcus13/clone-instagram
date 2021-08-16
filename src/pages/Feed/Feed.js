@@ -1,14 +1,8 @@
 import React from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, SafeAreaView, ScrollView, View } from 'react-native';
 import { Container } from './styles';
 import Header from '../../components/Header/Header';
+
 // import themes from '../../style/themes';
 import Post from '../../components/Post/Post';
 import testeImg from '../../assets/images/615340.jpg';
@@ -73,56 +67,66 @@ const data = [
   },
 ];
 
-//remover
-// const theme = themes.darkTheme;
-export default function feed() {
-  const renderPost = ({ item }) => <Post data={item} />;
+function ScrollStories() {
   const renderStory = ({ item }) => <Story data={item} />;
+  return (
+    <SafeAreaView>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <AddStory />
+
+        <View style={{ flexDirection: 'row' }}>
+          <FlatList
+            data={data}
+            renderItem={renderStory}
+            keyExtractor={(item) => item.img}
+            showsHorizontalScrollIndicator={false}
+            horizontal
+          />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+export default function Feed() {
+  const renderPost = ({ item }) => <Post data={item} />;
   //
+  // const dispatch = useDispatch();
+  // const getUser = useCallback(() => {
+  //   const user = auth().currentUser;
+  //   dispatch(login(user));
+  //   console.log('current user', user);
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   getUser();
+  // }, [getUser]);
 
   return (
     <Container>
       <Header />
-      {/* <Stories data={data} /> */}
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        nestedScrollEnabled={true}
-      >
+
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* <View> */}
+        {/* <View> */}
+        <ScrollStories />
+        {/* </View> */}
         <View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            nestedScrollEnabled={true}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <AddStory />
-
-              <FlatList
-                data={data}
-                renderItem={renderStory}
-                keyExtractor={(item) => item.img}
-                showsHorizontalScrollIndicator={false}
-                horizontal
-              />
-            </View>
-          </ScrollView>
-
-          <View>
-            <FlatList
-              data={data}
-              renderItem={renderPost}
-              keyExtractor={(item) => item.img}
-              showsVerticalScrollIndicator={false}
-            />
-          </View>
+          <FlatList
+            data={data}
+            renderItem={renderPost}
+            keyExtractor={(item) => item.img}
+            showsVerticalScrollIndicator={false}
+          />
         </View>
+        {/* </View> */}
       </ScrollView>
     </Container>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     // flex: 1,
+//   },
+// });

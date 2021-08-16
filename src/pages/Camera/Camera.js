@@ -18,7 +18,7 @@ import { RNCamera } from 'react-native-camera';
 import * as Styled from './styles';
 import ModalSendImage from '../../components/SendImage/SendImage';
 import { useNavigation } from '@react-navigation/native';
-import { useIsDrawerOpen } from '@react-navigation/drawer';
+// import { useIsDrawerOpen } from '@react-navigation/drawer';
 
 // ...
 
@@ -36,9 +36,9 @@ const PendingView = () => (
   </View>
 );
 
-export default function Explorer() {
+export default function Camera() {
   const navigation = useNavigation();
-  const isDrawerOpen = useIsDrawerOpen();
+  // const isDrawerOpen = useIsDrawerOpen();
   const typesCamera = {
     front: RNCamera.Constants.Type.front,
     back: RNCamera.Constants.Type.back,
@@ -97,7 +97,7 @@ export default function Explorer() {
         <ModalSendImage image={takedImage} cancel={settakedImage} />
       ) : (
         <Styled.Camera
-          isDrawerOpen={isDrawerOpen}
+          // isDrawerOpen={isDrawerOpen}
           style={styles.preview}
           type={cameraType}
           flashMode={flash}
@@ -123,9 +123,9 @@ export default function Explorer() {
             return (
               <>
                 <Styled.Header>
-                  <Styled.Settings name="settings-sharp" />
+                  <Styled.Icons.Settings name="settings-sharp" />
                   <TouchableWithoutFeedback onPress={handleFlash}>
-                    <Styled.Flash
+                    <Styled.Icons.Flash
                       name={flash === optionsFlash.on ? 'flash' : 'flash-off'}
                     />
                   </TouchableWithoutFeedback>
@@ -134,7 +134,7 @@ export default function Explorer() {
                       navigation.goBack();
                     }}
                   >
-                    <Styled.Close name="close" />
+                    <Styled.Icons.Close name="close" />
                   </TouchableWithoutFeedback>
                 </Styled.Header>
 
@@ -146,10 +146,10 @@ export default function Explorer() {
 
                 <Styled.Footer>
                   <TouchableOpacity onPress={handlelaunchLibrary}>
-                    <Styled.Galery name="ios-image-outline" />
+                    <Styled.Icons.Galery name="ios-image-outline" />
                   </TouchableOpacity>
                   <TouchableOpacity onPress={handleCameraType}>
-                    <Styled.SwitchCamera name="camera-reverse" />
+                    <Styled.Icons.SwitchCamera name="camera-reverse" />
                   </TouchableOpacity>
                 </Styled.Footer>
               </>

@@ -17,12 +17,15 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
-import Feed from './src/pages/Feed/Feed';
+// import Feed from './src/pages/Feed/Feed';
 import themes from './src/style/themes';
 
 ////////////
 import MainRoutes from './src/routes/StackNavigator';
 // import MainRoutes from './src/routes/TabNavigator';
+// import MainRoutes from './src/routes/DrawerFeed';
+import { Provider } from 'react-redux';
+import store from './src/store';
 
 const darkTheme = true;
 
@@ -31,10 +34,12 @@ const App = () => {
   const barstyle = darkTheme ? 'light-content' : 'dark-content';
   return (
     <>
-      <ThemeProvider theme={darkTheme ? themes.darkTheme : themes.lightTheme}>
-        <MainRoutes />
-        <StatusBar backgroundColor={background} barStyle={barstyle} />
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={darkTheme ? themes.darkTheme : themes.lightTheme}>
+          <MainRoutes />
+          <StatusBar backgroundColor={background} barStyle={barstyle} />
+        </ThemeProvider>
+      </Provider>
     </>
   );
 };

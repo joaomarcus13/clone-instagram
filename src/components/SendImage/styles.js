@@ -4,6 +4,7 @@ import ArrowRightIcon from 'react-native-vector-icons/MaterialIcons';
 import CloseIcon from 'react-native-vector-icons/Ionicons';
 import LinkIcon from 'react-native-vector-icons/Fontisto';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from '../../style/icons';
 
 export const Container = styled.View`
   flex: 1;
@@ -57,50 +58,41 @@ export const ButtonText = styled.Text`
 `;
 
 export const Icons = {
-  Close: styled(CloseIcon)`
+  Close: styled(Icon.Ionicons)`
     font-size: 28px;
     color: ${({ theme }) => theme.icon};
   `,
-  Download: styled(DownloadIcon)`
+  Download: styled(Icon.Feather)`
     font-size: 22px;
 
     color: ${({ theme }) => theme.icon};
   `,
-  ArrowRight: styled(ArrowRightIcon)`
+  ArrowRight: styled(Icon.MaterialIcons)`
     font-size: 22px;
     color: ${({ theme }) => theme.bg};
   `,
-  Link: styled(LinkIcon)`
+  Link: styled(Icon.Fontisto)`
     font-size: 20px;
     color: ${({ theme }) => theme.icon};
   `,
-  Sticker: styled(MaterialCommunityIcons)`
+  Sticker: styled(Icon.MaterialCommunityIcons)`
     font-size: 22px;
     color: ${({ theme }) => theme.icon};
   `,
-  Draw: styled(MaterialCommunityIcons)`
+  Draw: styled(Icon.MaterialCommunityIcons)`
     font-size: 23px;
     color: ${({ theme }) => theme.icon};
   `,
-  Letter: styled(MaterialCommunityIcons)`
+  Letter: styled(Icon.MaterialCommunityIcons)`
     font-size: 26px;
     color: ${({ theme }) => theme.icon};
   `,
 };
 
-// export const Download = styled(DownloadIcon)`
-//   color: ${({ theme }) => theme.icon};
-// `;
-// export const ArrowRight = styled(ArrowRightIcon)`
-//   font-size: 22px;
-//   color: ${({ theme }) => theme.bg};
-// `;
-
 export const ImageProfile = styled.Image`
   width: 30px;
   height: 30px;
   border-radius: 50px;
-
   border: 1px solid white;
 `;
 export const Border = styled.View`
@@ -114,12 +106,3 @@ export const TextProfile = styled.Text`
   margin-top: 5px;
   color: ${({ theme }) => theme.text};
 `;
-
-// export const Close = styled(IconClose)`
-//   font-size: 20px;
-//   color: ${({ theme }) => theme.icon};
-// `;
-// export const LinkIcon = styled(Link)`
-//   font-size: 20px;
-//   color: ${({ theme }) => theme.icon};
-// `;

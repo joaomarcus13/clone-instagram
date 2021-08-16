@@ -1,6 +1,9 @@
 import styled from 'styled-components/native';
 import IconCamera from 'react-native-vector-icons/Ionicons';
-export const Container = styled.View`
+import { TouchableOpacity } from 'react-native';
+import Icon from '../../style/icons';
+
+export const Container = styled(TouchableOpacity)`
   width: 100%;
   height: 80px;
   flex-direction: row;
@@ -24,6 +27,13 @@ export const TextSecondary = styled.Text`
   width: 70%;
   /* overflow: hidden; */
 `;
+
+export const Icons = {
+  Camera: styled(Icon.Ionicons)`
+    font-size: 28px;
+    color: ${({ theme }) => theme.iconSecondary};
+  `,
+};
 
 export const CameraIcon = styled(IconCamera)`
   font-size: 28px;

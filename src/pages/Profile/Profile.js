@@ -12,16 +12,25 @@ import * as Styled from './styles';
 import testeImg from '../../assets/images/615340.jpg';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const myProfile = true;
 const following = false;
 
-export default function Explorer() {
+export default function Profile() {
   const navigation = useNavigation();
+  const username = useSelector((state) => {
+    const email = state.user?.user?.email;
+    return email.substr(0, email.indexOf('@')) || '';
+    // return email ?  : '';
+  });
+  const name = useSelector((state) => state.user?.user?.displayName || '');
+
   return (
     <Styled.Container>
       <Styled.Header>
-        <Styled.TextHeader>joaomarcus13</Styled.TextHeader>
+        <Styled.TextHeader>{username}</Styled.TextHeader>
         <Styled.IconsHeader>
           <Styled.AddPost name="plus-square-o" />
           <TouchableWithoutFeedback
@@ -51,7 +60,7 @@ export default function Explorer() {
             </Styled.ViewEachNumbers>
           </Styled.ViewNumbers>
         </Styled.ViewImageProfile>
-        <Styled.TextProfile>Joao Marcos</Styled.TextProfile>
+        <Styled.TextProfile>{name}</Styled.TextProfile>
       </Styled.Information>
 
       {myProfile ? (

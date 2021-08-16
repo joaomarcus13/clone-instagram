@@ -5,7 +5,7 @@ export default function Search() {
   return (
     <Styled.Container>
       <Styled.Input placeholder="Search" selectionColor={'gray'} />
-      <Styled.SearchIcon name="search" />
+      <Styled.Icons.Search name="search" />
     </Styled.Container>
   );
 }

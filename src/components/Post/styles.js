@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
-import IconF from 'react-native-vector-icons/Feather';
-import IconAD from 'react-native-vector-icons/AntDesign';
-import IconFA from 'react-native-vector-icons/FontAwesome';
+import Icon from '../../style/icons';
 
 export const Container = styled.View`
   flex: 1;
@@ -19,69 +17,69 @@ export const Perfil = styled.Image`
   /* margin: 0 12px 0 12px; */
   margin-right: 12px;
 `;
-export const H1Top = styled.Text`
-  font-weight: 700;
-  flex: 1;
-  color: ${({ theme }) => theme.text};
-`;
-
-export const Dots = styled(IconF)`
-  margin-right: 10px;
-  font-size: 20px;
-  color: ${({ theme }) => theme.icon};
-`;
-
 export const AreaIcons = styled.View`
   flex-direction: row;
   /* background-color: red; */
   align-items: center;
   padding: 8px 14px;
 `;
+export const Icons = {
+  Dots: styled(Icon.Feather)`
+    margin-right: 5px;
+    font-size: 20px;
+    color: ${({ theme }) => theme.icon};
+  `,
+  Like: styled(Icon.AntDesign)`
+    font-size: 23px;
+    color: ${({ theme }) => theme.icon};
+    margin-right: 14px;
+  `,
+  Comment: styled(Icon.Feather)`
+    font-size: 25px;
+    color: ${({ theme }) => theme.icon};
+    margin-right: 14px;
+  `,
+  Share: styled(Icon.Feather)`
+    font-size: 23px;
+    color: ${({ theme }) => theme.icon};
+  `,
+  BookMark: styled(Icon.FontAwesome)`
+    font-size: 25px;
+    color: ${({ theme }) => theme.icon};
+    margin-left: auto;
+  `,
+};
 
-export const Like = styled(IconAD)`
-  font-size: 23px;
-  color: ${({ theme }) => theme.icon};
-  margin-right: 14px;
-`;
-export const Comment = styled(IconF)`
-  font-size: 25px;
-  color: ${({ theme }) => theme.icon};
-  margin-right: 14px;
-`;
-export const Share = styled(IconF)`
-  font-size: 23px;
-  color: ${({ theme }) => theme.icon};
-`;
-export const BookMark = styled(IconFA)`
-  font-size: 25px;
-  color: ${({ theme }) => theme.icon};
-  margin-left: auto;
-`;
+export const Text = {
+  Flex: styled.Text`
+    font-weight: 700;
+    flex: 1;
+    color: ${({ theme }) => theme.text};
+  `,
+  H1: styled.Text`
+    font-weight: bold;
+    color: ${({ theme }) => theme.text};
+    margin-right: 5px;
+  `,
+  H2: styled.Text`
+    color: ${({ theme }) => theme.text};
+  `,
+  H3: styled.Text`
+    color: ${({ theme }) => theme.textSecondary};
+  `,
+  H4: styled.Text`
+    font-size: 10px;
+    color: ${({ theme }) => theme.textSecondary};
+    /* margin-top: 5px; */
+  `,
+};
 
 export const Description = styled.View`
   padding: 0 14px;
-  /* justify-content: space-around; */
 `;
 export const DescriptionText = styled.View`
   flex-direction: row;
   margin: 3px 0 5px 0;
-`;
-
-export const H1 = styled.Text`
-  font-weight: bold;
-  color: ${({ theme }) => theme.text};
-  margin-right: 5px;
-`;
-export const H2 = styled.Text`
-  color: ${({ theme }) => theme.text};
-`;
-export const H3 = styled.Text`
-  color: ${({ theme }) => theme.textSecondary};
-`;
-export const H4 = styled.Text`
-  font-size: 10px;
-  color: ${({ theme }) => theme.textSecondary};
-  /* margin-top: 5px; */
 `;
 
 export const AddComment = styled.View`
@@ -97,6 +95,5 @@ export const ImageComment = styled.Image`
 
 export const Input = styled.TextInput`
   height: 30px;
-
   padding: 0;
 `;

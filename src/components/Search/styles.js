@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import IconSearch from 'react-native-vector-icons/Ionicons';
+import Icon from '../../style/icons';
 export const Container = styled.View`
   height: 56px;
   align-items: center;
@@ -16,9 +16,11 @@ export const Input = styled.TextInput`
   position: relative;
 `;
 
-export const SearchIcon = styled(IconSearch)`
-  position: absolute;
-  font-size: 20px;
-  left: 30px;
-  color: ${({ theme }) => theme.icon};
-`;
+export const Icons = {
+  Search: styled(Icon.Ionicons)`
+    position: absolute;
+    font-size: 20px;
+    left: 30px;
+    color: ${({ theme }) => theme.icon};
+  `,
+};

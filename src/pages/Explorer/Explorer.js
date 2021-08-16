@@ -81,8 +81,6 @@ const data = [
 ];
 
 function ImageExplorer({ item, index }) {
-  console.log(index);
-
   return (
     <View
       style={{

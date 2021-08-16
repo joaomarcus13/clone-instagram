@@ -9,21 +9,21 @@ import logo from '../../assets/icons/2053433.png';
 export default function AddStory() {
   const navigation = useNavigation();
   return (
-    <Styled.Story>
+    <Styled.Container>
       <Touch
         onPress={() => {
           navigation.navigate('Camera');
         }}
       >
         <Styled.Border>
-          <Styled.StoryImg source={teste} />
+          <Styled.Image source={teste} />
         </Styled.Border>
       </Touch>
       <Styled.BorderIcon>
         <Styled.IconAdd source={logo} />
       </Styled.BorderIcon>
 
-      <Styled.StoryText>joaomarcus13</Styled.StoryText>
-    </Styled.Story>
+      <Styled.Text>joaomarcus13</Styled.Text>
+    </Styled.Container>
   );
 }

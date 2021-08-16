@@ -63,6 +63,7 @@ export const TextProfile = styled.Text`
   color: ${({ theme }) => theme.text};
   font-weight: bold;
   margin: 5px 0 10px 20px;
+  text-transform: capitalize;
 `;
 
 export const ViewNumbers = styled.View`

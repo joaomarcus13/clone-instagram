@@ -1,31 +1,60 @@
 import React from 'react';
+import { useState } from 'react';
 import {
   FlatList,
   SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginRequest } from '../../store/actions/user';
 import logo from '../../assets/icons/instagram-logo-white.png';
+import { useNavigation } from '@react-navigation/native';
 import * as Styled from './styles';
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigator = useNavigation();
+
+  function handleLogin() {
+    dispatch(
+      loginRequest({
+        name: username,
+        email: username,
+        password,
+      })
+    );
+  }
+
+  function handleSignUp() {
+    navigator.navigate('SignUp');
+  }
+
   return (
     <Styled.Container>
       <Styled.ContainerComponent>
         <Styled.Logo source={logo} />
         <Styled.Input
+          onChangeText={(text) => setUsername(text)}
+          defaultValue={username}
           placeholder="Phone number, email or username"
           selectionColor={'gray'}
         />
         <Styled.Input
           placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+          defaultValue={password}
           secureTextEntry={true}
           selectionColor={'gray'}
         />
-        <Styled.Button>
+        <Styled.Button onPress={handleLogin} activeOpacity={0.8}>
           <Styled.TextButton>Log in</Styled.TextButton>
         </Styled.Button>
 
@@ -47,7 +76,9 @@ export default function Login() {
       <Styled.Footer>
         <Styled.ViewInline>
           <Styled.H2>dont have account? </Styled.H2>
-          <Styled.H2Bold>sing up</Styled.H2Bold>
+          <TouchableOpacity activeOpacity={1} onPress={handleSignUp}>
+            <Styled.H2Bold>sing up</Styled.H2Bold>
+          </TouchableOpacity>
         </Styled.ViewInline>
       </Styled.Footer>
     </Styled.Container>

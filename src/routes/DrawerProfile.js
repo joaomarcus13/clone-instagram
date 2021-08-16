@@ -1,6 +1,6 @@
 import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import DrawerContent from '../components/DrawerContent/Drawer';
+import DrawerContent from '../components/DrawerProfile/Drawer';
 import Profile from '../pages/Profile/Profile';
 import Settings from '../pages/Settings/Settings';
 
@@ -20,7 +20,7 @@ function MyDrawer() {
       edgeWidth={500}
     >
       <Drawer.Screen name="Profile" component={Profile} />
-      <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="Settings" component={Settings} options={{}} />
     </Drawer.Navigator>
   );
 }

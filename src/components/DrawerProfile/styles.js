@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
-import IconFA from 'react-native-vector-icons/FontAwesome';
-import IconAD from 'react-native-vector-icons/AntDesign';
-import Octicons from 'react-native-vector-icons/Octicons';
+import Icon from '../../style/icons';
 
 export const Container = styled.View`
   flex: 1;
@@ -37,7 +35,7 @@ export const Footer = styled.View`
 `;
 
 export const Icons = {
-  Settings: styled(Octicons)`
+  Settings: styled(Icon.Octicons)`
     font-size: 22px;
     color: ${({ theme }) => theme.icon};
   `,

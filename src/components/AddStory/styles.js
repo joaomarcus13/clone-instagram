@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-export const Story = styled.View`
+export const Container = styled.View`
   position: relative;
   height: 115px;
   align-items: center;
@@ -10,14 +10,14 @@ export const Story = styled.View`
   border-bottom-color: ${({ theme }) => theme.borderSecondary};
   border-bottom-width: 0.3px;
 `;
-export const StoryImg = styled.Image`
+export const Image = styled.Image`
   width: 65px;
   height: 65px;
 
   border-radius: 50px;
 `;
 
-export const StoryText = styled.Text`
+export const Text = styled.Text`
   font-size: 11px;
   color: ${({ theme }) => theme.text};
 `;
@@ -38,7 +38,7 @@ export const IconAdd = styled.Image`
 
 export const BorderIcon = styled.View`
   position: absolute;
-  top: 60px;
+  top: 62px;
   right: 15px;
   height: 18px;
   width: 18px;

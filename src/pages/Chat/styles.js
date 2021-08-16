@@ -1,7 +1,5 @@
 import styled from 'styled-components/native';
-import IconAD from 'react-native-vector-icons/AntDesign';
-import IconI from 'react-native-vector-icons/Ionicons';
-import IconE from 'react-native-vector-icons/Entypo';
+import Icon from '../../style/icons';
 
 export const Container = styled.View`
   flex: 1;
@@ -21,15 +19,17 @@ export const TextHeader = styled.Text`
   width: 50%;
 `;
 
-export const BackIcon = styled(IconAD)`
-  font-size: 25px;
-  color: ${({ theme }) => theme.icon};
-`;
-export const VideoIcon = styled(IconI)`
-  font-size: 28px;
-  color: ${({ theme }) => theme.icon};
-`;
-export const NewMessageIcon = styled(IconE)`
-  font-size: 21px;
-  color: ${({ theme }) => theme.icon};
-`;
+export const Icons = {
+  Back: styled(Icon.AntDesign)`
+    font-size: 25px;
+    color: ${({ theme }) => theme.icon};
+  `,
+  Video: styled(Icon.Ionicons)`
+    font-size: 28px;
+    color: ${({ theme }) => theme.icon};
+  `,
+  Message: styled(Icon.Entypo)`
+    font-size: 21px;
+    color: ${({ theme }) => theme.icon};
+  `,
+};
