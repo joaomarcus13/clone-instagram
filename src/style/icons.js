@@ -43,10 +43,18 @@ export const nameIcons = {
   back: 'arrowleft',
   message: 'new-message',
   settings: 'gear',
+  settings2: 'settings-sharp',
   addPost: 'plus-square-o',
   heart: 'hearto',
   message2: 'message-circle',
   camera: 'camera-outline',
+  reverseCamera: 'camera-reverse',
+  flash: 'flash',
+  flashOff: 'flash-off',
+  close: 'close',
+  next: 'arrowright',
+  galery: 'ios-image-outline',
+  check: 'check',
 };
 
 export default {

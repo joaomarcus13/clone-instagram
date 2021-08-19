@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import {
-  FlatList,
-  SafeAreaView,
-  ScrollView,
-  Image,
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  Dimensions,
 } from 'react-native';
-import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import testeimage from '../../assets/images/a.jpg';
+import { launchImageLibrary } from 'react-native-image-picker';
 import { RNCamera } from 'react-native-camera';
 import * as Styled from './styles';
 import ModalSendImage from '../../components/SendImage/SendImage';
 import { useNavigation } from '@react-navigation/native';
-// import { useIsDrawerOpen } from '@react-navigation/drawer';
-
-// ...
+import { sendImage } from '../../store/actions/post';
+// import storage from '@react-native-firebase/storage';
+import { useDispatch } from 'react-redux';
+import { nameIcons } from '../../style/icons';
 
 const PendingView = () => (
   <View
@@ -38,6 +32,9 @@ const PendingView = () => (
 
 export default function Camera() {
   const navigation = useNavigation();
+  // const reference = storage().ref('stories');
+  const dispatch = useDispatch();
+
   // const isDrawerOpen = useIsDrawerOpen();
   const typesCamera = {
     front: RNCamera.Constants.Type.front,
@@ -56,9 +53,20 @@ export default function Camera() {
   const takePicture = async function (camera) {
     const options = { quality: 0.5, base64: true };
     const data = await camera.takePictureAsync(options);
-    //eslint-disable-next-line
-    console.log(data.base64.substr(0, 100));
-    settakedImage('data:image/jpg;base64,' + data.base64);
+
+    // try {
+    //   await reference
+    //     .child(`image${Date.now()}`)
+    //     .putString(data.base64, 'base64');
+    // } catch (error) {
+    //   console.log(error);
+    // }
+
+    settakedImage(data.base64);
+  };
+
+  const confirm = () => {
+    dispatch(sendImage({ image: takedImage, fold: 'stories', navigation }));
   };
 
   const handleCameraType = () => {
@@ -86,15 +94,17 @@ export default function Camera() {
           },
         });
       }
-      // console.log(assets);
-      // console.log(assets[0].base64);
     };
     launchImageLibrary(options, callback);
   };
   return (
     <Styled.Container>
       {takedImage ? (
-        <ModalSendImage image={takedImage} cancel={settakedImage} />
+        <ModalSendImage
+          image={takedImage}
+          cancel={settakedImage}
+          confirm={confirm}
+        />
       ) : (
         <Styled.Camera
           // isDrawerOpen={isDrawerOpen}
@@ -123,10 +133,14 @@ export default function Camera() {
             return (
               <>
                 <Styled.Header>
-                  <Styled.Icons.Settings name="settings-sharp" />
+                  <Styled.Icons.Settings name={nameIcons.settings2} />
                   <TouchableWithoutFeedback onPress={handleFlash}>
                     <Styled.Icons.Flash
-                      name={flash === optionsFlash.on ? 'flash' : 'flash-off'}
+                      name={
+                        flash === optionsFlash.on
+                          ? nameIcons.flash
+                          : nameIcons.flashOff
+                      }
                     />
                   </TouchableWithoutFeedback>
                   <TouchableWithoutFeedback
@@ -134,7 +148,7 @@ export default function Camera() {
                       navigation.goBack();
                     }}
                   >
-                    <Styled.Icons.Close name="close" />
+                    <Styled.Icons.Close name={nameIcons.close} />
                   </TouchableWithoutFeedback>
                 </Styled.Header>
 
@@ -146,10 +160,10 @@ export default function Camera() {
 
                 <Styled.Footer>
                   <TouchableOpacity onPress={handlelaunchLibrary}>
-                    <Styled.Icons.Galery name="ios-image-outline" />
+                    <Styled.Icons.Galery name={nameIcons.galery} />
                   </TouchableOpacity>
                   <TouchableOpacity onPress={handleCameraType}>
-                    <Styled.Icons.SwitchCamera name="camera-reverse" />
+                    <Styled.Icons.SwitchCamera name={nameIcons.reverseCamera} />
                   </TouchableOpacity>
                 </Styled.Footer>
               </>

@@ -21,11 +21,10 @@ const following = false;
 export default function Profile() {
   const navigation = useNavigation();
   const username = useSelector((state) => {
-    const email = state.user?.user?.email;
-    return email.substr(0, email.indexOf('@')) || '';
-    // return email ?  : '';
+    const email = state.user?.email;
+    return email ? email.substr(0, email.indexOf('@')) : '';
   });
-  const name = useSelector((state) => state.user?.user?.displayName || '');
+  const name = useSelector((state) => state.user?.displayName || '');
 
   return (
     <Styled.Container>

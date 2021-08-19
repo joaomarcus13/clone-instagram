@@ -27,7 +27,7 @@ export default function MyStack() {
     (userAuth) => {
       setUser(userAuth);
       if (userAuth) {
-        console.log('user in stack onauthstate', userAuth);
+        // console.log('usezr in stack onauthstate', userAuth);
         dispatch(
           login({
             displayName: userAuth.displayName || '',
@@ -45,7 +45,7 @@ export default function MyStack() {
     [initializing, dispatch]
   );
 
-  console.log('user in stack', user);
+  // console.log('user in stack', user);
 
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);

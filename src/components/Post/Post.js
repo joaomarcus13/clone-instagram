@@ -1,19 +1,23 @@
 import React from 'react';
 import { StyleSheet, Image, Dimensions } from 'react-native';
+import imgProfile from '../../assets/icons/default-user.jpg';
 import * as Styled from './styles';
 
 export default function Post({ data }) {
   return (
     <Styled.Container style={styles.container}>
       <Styled.Header style={styles.header}>
-        <Styled.Perfil source={data.img} style={styles.perfil} />
+        <Styled.Perfil
+          source={data.user.photoURL || imgProfile}
+          style={styles.perfil}
+        />
         <Styled.Text.Flex style={styles.authorName}>
-          {data.author}
+          {data.user.name}
         </Styled.Text.Flex>
         <Styled.Icons.Dots name="more-vertical" />
       </Styled.Header>
 
-      <Image source={data.img} style={styles.image} />
+      <Image source={{ uri: data.url }} style={styles.image} />
 
       <Styled.AreaIcons style={styles.areaIcons}>
         <Styled.Icons.Like name="hearto" />
@@ -25,11 +29,11 @@ export default function Post({ data }) {
         <Styled.Icons.BookMark name="bookmark-o" />
       </Styled.AreaIcons>
 
-      <Styled.Description style={styles.description}>
-        <Styled.Text.Flex>{data.likes} likes</Styled.Text.Flex>
+      <Styled.Description>
+        <Styled.Text.Flex>33 likes</Styled.Text.Flex>
         <Styled.DescriptionText>
-          <Styled.Text.H1>{data.author}</Styled.Text.H1>
-          <Styled.Text.H2>{data.description}</Styled.Text.H2>
+          <Styled.Text.H1>{data.user.name}</Styled.Text.H1>
+          <Styled.Text.H2>{data.caption}</Styled.Text.H2>
         </Styled.DescriptionText>
 
         <Styled.Text.H3>View all 21 comments</Styled.Text.H3>
@@ -49,6 +53,6 @@ const styles = StyleSheet.create({
   image: {
     width: Dimensions.get('window').width,
     height: (Dimensions.get('window').width * 3) / 3,
-    resizeMode: 'cover',
+    resizeMode: 'contain',
   },
 });

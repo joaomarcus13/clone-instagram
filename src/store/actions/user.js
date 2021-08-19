@@ -13,22 +13,19 @@ export const loginRequest = (payload) => {
     } catch (error) {
       console.warn('Login fail!! ');
     }
-
-    dispatch({
-      type: actionTypes.USER_LOGGED_IN,
-      payload: {
-        user: loggedInUser.user,
-      },
-    });
+    // dispatch({
+    //   type: actionTypes.USER_LOGGED_IN,
+    //   payload: {
+    //     user: loggedInUser.user,
+    //   },
+    // });
   };
 };
 
 export const login = (payload) => {
-  return (dispatch) => {
-    dispatch({
-      type: actionTypes.USER_LOGGED_IN,
-      payload: { user: payload },
-    });
+  return {
+    type: actionTypes.USER_LOGGED_IN,
+    payload,
   };
 };
 
@@ -45,18 +42,16 @@ export const register = (payload) => {
         displayName: payload.name,
       });
 
-      dispatch({
-        type: actionTypes.USER_LOGGED_IN,
-        payload: {
-          user: {
-            displayName: payload.name,
-            email: refUser.user.email,
-            metadata: refUser.user.metadata,
-            uid: refUser.user.uid,
-            photoURL: refUser.user.photoURL,
-          },
-        },
-      });
+      dispatch(
+        login({
+          displayName: payload.name,
+          email: refUser.user.email,
+          metadata: refUser.user.metadata,
+          uid: refUser.user.uid,
+          photoURL: refUser.user.photoURL,
+        })
+      );
+
       console.log('User account created & signed in!', refUser.user);
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {

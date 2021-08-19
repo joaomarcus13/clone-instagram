@@ -1,13 +1,12 @@
 import actionTypes from '../types';
 
 const initialState = {
-  // isLoggedIn: false,
-  // name: null,
-  // username: null,
-  // email: null,
-  // password: null,
-  // bio: null,
-  user: {},
+  displayName: '',
+  email: '',
+  metadata: null,
+  uid: null,
+  photoURL: null,
+  // user: {},
 };
 
 // {
@@ -28,22 +27,34 @@ const initialState = {
 //   }
 
 const reducer = (state = initialState, action) => {
-  console.log('reducer', action.payload);
+  // console.log('reducer', action.payload);
   switch (action.type) {
     case actionTypes.USER_LOGGED_IN:
       return {
         ...state,
-        user: action.payload.user,
+        displayName: action.payload.displayName,
+        email: action.payload.email,
+        metadata: action.payload.metadata,
+        uid: action.payload.uid,
+        photoURL: action.payload.photoURL,
       };
     case actionTypes.USER_REGISTER:
       return {
         ...state,
-        user: action.payload.user,
+        displayName: action.payload.displayName,
+        email: action.payload.email,
+        metadata: action.payload.metadata,
+        uid: action.payload.uid,
+        photoURL: action.payload.photoURL,
       };
     case actionTypes.USER_LOGGED_OUT:
       return {
         ...state,
-        user: {},
+        displayName: '',
+        email: '',
+        metadata: null,
+        uid: null,
+        photoURL: null,
       };
     default:
       return state;

@@ -93,7 +93,7 @@ export const ImageProfile = styled.Image`
   width: 30px;
   height: 30px;
   border-radius: 50px;
-  border: 1px solid white;
+  /* border: 1px solid white; */
 `;
 export const Border = styled.View`
   width: 32px;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FlatList, SafeAreaView, ScrollView, View } from 'react-native';
 import { Container } from './styles';
 import Header from '../../components/Header/Header';
@@ -67,6 +67,9 @@ const data = [
   },
 ];
 
+import database from '@react-native-firebase/database';
+import { useEffect } from 'react';
+
 function ScrollStories() {
   const renderStory = ({ item }) => <Story data={item} />;
   return (
@@ -90,17 +93,19 @@ function ScrollStories() {
 
 export default function Feed() {
   const renderPost = ({ item }) => <Post data={item} />;
-  //
-  // const dispatch = useDispatch();
-  // const getUser = useCallback(() => {
-  //   const user = auth().currentUser;
-  //   dispatch(login(user));
-  //   console.log('current user', user);
-  // }, [dispatch]);
 
-  // useEffect(() => {
-  //   getUser();
-  // }, [getUser]);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    database()
+      .ref('posts')
+      .on('value', (snapshot) => {
+        console.log('User data: ', snapshot.val());
+        setPosts(Object.values(snapshot.val()));
+      });
+  }, []);
+
+  console.log(posts);
 
   return (
     <Container>
@@ -113,9 +118,9 @@ export default function Feed() {
         {/* </View> */}
         <View>
           <FlatList
-            data={data}
+            data={posts}
             renderItem={renderPost}
-            keyExtractor={(item) => item.img}
+            keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
           />
         </View>
@@ -124,9 +129,3 @@ export default function Feed() {
     </Container>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     // flex: 1,
-//   },
-// });

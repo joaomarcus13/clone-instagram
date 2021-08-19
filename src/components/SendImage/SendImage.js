@@ -3,7 +3,7 @@ import * as Styled from './styles';
 import testeimg from '../../assets/images/a.jpg';
 import { TouchableWithoutFeedback } from 'react-native';
 
-export default function ModalSendImage({ image, cancel }) {
+export default function ModalSendImage({ image, cancel, confirm }) {
   return (
     <Styled.Container>
       <Styled.Header>
@@ -22,7 +22,7 @@ export default function ModalSendImage({ image, cancel }) {
       </Styled.Header>
       <Styled.Image
         source={{
-          uri: image,
+          uri: `data:image/jpg;base64,${image}`,
         }}
       />
       <Styled.Footer>
@@ -32,7 +32,7 @@ export default function ModalSendImage({ image, cancel }) {
           </Styled.Border>
           <Styled.TextProfile>Your Story</Styled.TextProfile>
         </Styled.ToStory>
-        <Styled.Button>
+        <Styled.Button onPress={confirm}>
           <Styled.ButtonText>Send to</Styled.ButtonText>
           <Styled.Icons.ArrowRight name="keyboard-arrow-right" />
         </Styled.Button>
