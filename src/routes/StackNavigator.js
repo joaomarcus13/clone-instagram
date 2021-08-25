@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigator from './TabNavigator';
-import Camera from '../pages/Camera/Camera';
+import NewStory from '../pages/NewStory/NewStory';
 
 import Activity from '../pages/Activity/Activity';
 import NewPost from '../pages/NewPost/NewPost';
@@ -14,6 +14,7 @@ import StackLogin from './StackLogin';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/actions/user';
 import auth from '@react-native-firebase/auth';
+import Stories from '../pages/Stories/Stories';
 
 const Stack = createNativeStackNavigator();
 
@@ -69,8 +70,8 @@ export default function MyStack() {
           <>
             <Stack.Screen name="Tab" component={TabNavigator} />
             <Stack.Screen
-              name="Camera"
-              component={Camera}
+              name="NewStory"
+              component={NewStory}
               options={{
                 stackAnimation: 'slide_from_left',
                 // transitionSpec: {
@@ -106,6 +107,13 @@ export default function MyStack() {
               component={NewPost}
               options={{
                 stackAnimation: 'slide_from_left',
+              }}
+            />
+            <Stack.Screen
+              name="Story"
+              component={Stories}
+              options={{
+                stackAnimation: 'default',
               }}
             />
           </>

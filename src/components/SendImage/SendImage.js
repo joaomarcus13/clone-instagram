@@ -1,4 +1,5 @@
 import React from 'react';
+import { Image } from 'react-native';
 import * as Styled from './styles';
 import testeimg from '../../assets/images/a.jpg';
 import { TouchableWithoutFeedback } from 'react-native';
@@ -7,11 +8,7 @@ export default function ModalSendImage({ image, cancel, confirm }) {
   return (
     <Styled.Container>
       <Styled.Header>
-        <TouchableWithoutFeedback
-          onPress={() => {
-            cancel(null);
-          }}
-        >
+        <TouchableWithoutFeedback onPress={cancel}>
           <Styled.Icons.Close name="close" />
         </TouchableWithoutFeedback>
         <Styled.Icons.Link name="link2" />
@@ -20,7 +17,8 @@ export default function ModalSendImage({ image, cancel, confirm }) {
         <Styled.Icons.Draw name="draw" />
         <Styled.Icons.Letter name="format-letter-case" />
       </Styled.Header>
-      <Styled.Image
+      <Image
+        style={{ flex: 1, resizeMode: 'contain' }}
         source={{
           uri: `data:image/jpg;base64,${image}`,
         }}

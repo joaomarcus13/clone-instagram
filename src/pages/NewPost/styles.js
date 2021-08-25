@@ -7,6 +7,8 @@ export const Container = styled.View`
 `;
 export const ContainerImage = styled.View`
   height: 60%;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Image = styled.Image`
@@ -27,6 +29,10 @@ export const Text = {
     width: 60%;
     color: ${({ theme }) => theme.text};
     font-weight: bold;
+  `,
+  Info: styled.Text`
+    font-size: 14px;
+    color: ${({ theme }) => theme.textSecondary};
   `,
   Footer: styled.Text`
     font-size: 18px;
@@ -72,7 +78,7 @@ export const Icons = {
   `,
 };
 
-export const BG = styled.View`
+export const BG = styled.TouchableOpacity`
   /* padding: 10px; */
   height: 30px;
   width: 30px;

@@ -16,7 +16,7 @@ import testeImg3 from '../../assets/images/gorillazstylo-157898.jpeg';
 import Story from '../../components/Stories/Stories';
 import AddStory from '../../components/AddStory/AddStory';
 
-const data = [
+const dataTest = [
   {
     img: testeImg,
     author: 'joaomarcus13',
@@ -70,8 +70,35 @@ const data = [
 import database from '@react-native-firebase/database';
 import { useEffect } from 'react';
 
+// {"30vr8h4RvkP1sekJlmHML9ckxLk1":
+//  [{"caption": "", "url": "https://firebasestorage.googleapis.com/v0/b/insta-cb066.appspot.com/o/stories%2Fimage1629812847410?alt=media&token=c2de1aed-ca43-443d-b33d-b7a73934e948", "user": [Object]},
+//   {"caption": "", "url": "https://firebasestorage.googleapis.com/v0/b/insta-cb066.appspot.com/o/stories%2Fimage1629812833727?alt=media&token=a3c07e45-8a12-4bf2-bb95-a9f5055f469b", "user": [Object]}],
+
+//   "nQYlNfpFUsP7H9wmp4JwPiHiUoN2": [{"caption": "", "url": "https://firebasestorage.googleapis.com/v0/b/insta-cb066.appspot.com/o/stories%2Fimage1629812890819?alt=media&token=88bab1fa-27fe-403d-8121-03eb29f2b889", "user": [Object]}], "zkJT7ZObdqbtMCRFl63SApqlxBI3": [{"caption": "", "url": "https://firebasestorage.googleapis.com/v0/b/insta-cb066.appspot.com/o/stories%2Fimage1629812804899?alt=media&token=ab06f0ce-d5f4-4c70-877f-ce2b556cc037", "user": [Object]}]}
+
 function ScrollStories() {
   const renderStory = ({ item }) => <Story data={item} />;
+
+  const [stories, setStories] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = database()
+      .ref('stories')
+      .on('value', (snapshot) => {
+        const data = {};
+        if (snapshot.exists()) {
+          // const stories = snapshot.val()
+          for (let i of Object.values(snapshot.val())) {
+            data.hasOwnProperty(i.user.uid)
+              ? data[i.user.uid].push(i)
+              : (data[i.user.uid] = [i]);
+          }
+          setStories(Object.values(data));
+          console.log(Object.values(data));
+        }
+      });
+    return () => database().ref('stories').off('value', unsubscribe);
+  }, []);
   return (
     <SafeAreaView>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -79,9 +106,9 @@ function ScrollStories() {
 
         <View style={{ flexDirection: 'row' }}>
           <FlatList
-            data={data}
+            data={stories}
             renderItem={renderStory}
-            keyExtractor={(item) => item.img}
+            keyExtractor={(item) => item[0].user.uid}
             showsHorizontalScrollIndicator={false}
             horizontal
           />
@@ -97,15 +124,18 @@ export default function Feed() {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    database()
+    const unsubscribe = database()
       .ref('posts')
       .on('value', (snapshot) => {
-        console.log('User data: ', snapshot.val());
-        setPosts(Object.values(snapshot.val()));
+        // console.log('User data: ', snapshot.val());
+        if (snapshot.exists()) {
+          setPosts(Object.values(snapshot.val()));
+        }
       });
+    return () => database().ref('posts').off('value', unsubscribe);
   }, []);
 
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <Container>

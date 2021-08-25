@@ -12,7 +12,7 @@ export default function AddStory() {
     <Styled.Container>
       <Touch
         onPress={() => {
-          navigation.navigate('Camera');
+          navigation.navigate('NewStory');
         }}
       >
         <Styled.Border>

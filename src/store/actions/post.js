@@ -24,7 +24,7 @@ export function sendImage(payload) {
           photoURL: getState().user.photoURL,
         },
         url: url,
-        caption: payload.caption,
+        caption: payload.caption || '',
       });
 
       // database()
