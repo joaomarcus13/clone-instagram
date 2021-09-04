@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, Platform } from 'react';
 import {
   FlatList,
   View,
@@ -7,7 +7,7 @@ import {
   Dimensions,
   Animated,
 } from 'react-native';
-import Carousel from 'react-native-snap-carousel';
+import Carousel, { getInputRangeFromIndexes } from 'react-native-snap-carousel';
 
 import * as Styled from './styles';
 import * as GStyled from '../../style/global';
@@ -25,13 +25,90 @@ function Story({ data }) {
     // </ScrollView>
   );
 }
+const PESPECTIVE = 1.7;
+const TR_POSITION = 1.5;
 
 export default function Stories({ route }) {
   const { data } = route.params;
-
-  const refCarrousel = useRef(null);
-
   const renderStory = ({ item }) => <Story data={item} />;
+
+  const _scrollInterpolator = (index, carouselProps) => {
+    const range = [1, 0, -1];
+    const inputRange = getInputRangeFromIndexes(range, index, carouselProps);
+    const outputRange = range;
+
+    return { inputRange, outputRange };
+  };
+
+  const _animatedStyles = (i, scrollX, carouselProps) => {
+    let pageX = 0;
+
+    let opacity = scrollX.interpolate({
+      inputRange: [
+        (pageX - width) / width,
+        (pageX - width + 10) / width,
+        pageX / width,
+        (pageX + width - 250) / width,
+        (pageX + width) / width,
+      ],
+      outputRange: [0, 0.6, 1, 0.6, 0],
+      extrapolate: 'clamp',
+    });
+
+    return {
+      transform: [
+        {
+          perspective: width,
+        },
+        {
+          translateX: scrollX.interpolate({
+            inputRange: [
+              pageX - width,
+              pageX - width + 0.1,
+              pageX,
+              pageX + width - 0.1,
+              pageX + width,
+            ],
+            outputRange: [
+              -width - 1,
+              (-width - 1) / PESPECTIVE,
+              0,
+              (width + 1) / PESPECTIVE,
+              +width + 1,
+            ],
+          }),
+        },
+        {
+          rotateY: scrollX.interpolate({
+            inputRange: [-1, 0, 1],
+            outputRange: ['-60deg', '0deg', '60deg'],
+            extrapolate: 'clamp',
+          }),
+        },
+        // {
+        //   translateX: scrollX.interpolate({
+        //     inputRange: [
+        //       (pageX - width) / width,
+        //       (pageX - width + 0.1) / width,
+        //       pageX / width,
+        //       (pageX + width - 0.1) / width,
+        //       (pageX + width) / width,
+        //     ],
+        //     outputRange: [
+        //       -width - 1,
+        //       (-width - 1) / PESPECTIVE,
+        //       0,
+        //       (width + 1) / PESPECTIVE,
+        //       +width + 1,
+        //     ],
+        //     extrapolate: 'clamp',
+        //   }),
+        // },
+      ],
+      opacity: opacity,
+    };
+  };
+
   return (
     <GStyled.Container>
       {/* <FlatList
@@ -62,7 +139,9 @@ export default function Stories({ route }) {
         ))}
       </ScrollView> */}
       <Carousel
-        layout={'tinder'}
+        // layout={'tinder'}
+        scrollInterpolator={_scrollInterpolator}
+        slideInterpolatedStyle={_animatedStyles}
         // ref={this.carouselRef}
         data={data}
         renderItem={renderStory}

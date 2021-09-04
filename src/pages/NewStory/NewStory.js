@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Camera from '../../components/Camera/Camera';
-import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { launchImageLibrary } from 'react-native-image-picker';
 import ModalSendImage from '../../components/SendImage/SendImage';
 import { sendImage } from '../../store/actions/post';
 import { useDispatch } from 'react-redux';
@@ -30,11 +28,9 @@ export default function NewStory() {
         />
       ) : (
         <Camera
-          // fold="stories"
           openGalery={() => {
             handlelaunchLibrary();
           }}
-          // navigation={navigation}
           takedImage={image}
           callback={(img) => {
             setImage(img);

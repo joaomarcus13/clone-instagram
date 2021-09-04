@@ -1,24 +1,16 @@
 import actionTypes from '../types';
-import auth from '@react-native-firebase/auth';
+import api from '../../services/api';
+import { startLoading, stopLoading } from '../actions/application';
+import { alert } from '../../util/alert';
 
 export const loginRequest = (payload) => {
   return async (dispatch) => {
-    let loggedInUser;
-    try {
-      loggedInUser = await auth().signInWithEmailAndPassword(
-        payload.email,
-        payload.password
-      );
-      console.log('Login Successful!', loggedInUser);
-    } catch (error) {
-      console.warn('Login fail!! ');
+    dispatch(startLoading({ msg: 'logging in...' }));
+    let loggedInUser = await api.login(payload.email, payload.password);
+    dispatch(stopLoading());
+    if (typeof loggedInUser === 'string') {
+      alert(loggedInUser, 'Ok', null);
     }
-    // dispatch({
-    //   type: actionTypes.USER_LOGGED_IN,
-    //   payload: {
-    //     user: loggedInUser.user,
-    //   },
-    // });
   };
 };
 
@@ -31,49 +23,39 @@ export const login = (payload) => {
 
 export const register = (payload) => {
   return async (dispatch) => {
-    let refUser;
-    try {
-      refUser = await auth().createUserWithEmailAndPassword(
-        payload.email,
-        payload.password
-      );
+    dispatch(startLoading({ msg: 'creating account...' }));
 
-      await refUser.user.updateProfile({
-        displayName: payload.name,
-      });
+    const url = await api.storageImage(payload.fold, payload.photoProfile);
 
+    const refUser = await api.createAccount(
+      payload.email,
+      payload.password,
+      payload.name,
+      url
+    );
+
+    dispatch(stopLoading());
+    if (typeof refUser !== 'string') {
       dispatch(
         login({
           displayName: payload.name,
           email: refUser.user.email,
           metadata: refUser.user.metadata,
           uid: refUser.user.uid,
-          photoURL: refUser.user.photoURL,
+          photoURL: url,
         })
       );
-
-      console.log('User account created & signed in!', refUser.user);
-    } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        console.log('That email address is already in use!');
-      }
-
-      if (error.code === 'auth/invalid-email') {
-        console.log('That email address is invalid!');
-      }
-      console.error(error);
+    } else {
+      alert(refUser, 'Ok', () => {
+        payload.navigation.navigate('SignUp');
+      });
     }
   };
 };
 
 export const logout = () => {
   return async (dispatch) => {
-    try {
-      await auth().signOut();
-      console.log('User signed out!');
-    } catch (error) {
-      console.log(error);
-    }
+    await api.logout();
     dispatch({
       type: actionTypes.USER_LOGGED_OUT,
     });

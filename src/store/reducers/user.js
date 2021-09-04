@@ -32,21 +32,22 @@ const reducer = (state = initialState, action) => {
     case actionTypes.USER_LOGGED_IN:
       return {
         ...state,
-        displayName: action.payload.displayName,
-        email: action.payload.email,
-        metadata: action.payload.metadata,
-        uid: action.payload.uid,
-        photoURL: action.payload.photoURL,
+        ...action.payload,
+        // displayName: action.payload.displayName,
+        // email: action.payload.email,
+        // metadata: action.payload.metadata,
+        // uid: action.payload.uid,
+        // photoURL: action.payload.photoURL,
       };
-    case actionTypes.USER_REGISTER:
-      return {
-        ...state,
-        displayName: action.payload.displayName,
-        email: action.payload.email,
-        metadata: action.payload.metadata,
-        uid: action.payload.uid,
-        photoURL: action.payload.photoURL,
-      };
+    // case actionTypes.USER_REGISTER:
+    //   return {
+    //     ...state,
+    //     displayName: action.payload.displayName,
+    //     email: action.payload.email,
+    //     metadata: action.payload.metadata,
+    //     uid: action.payload.uid,
+    //     photoURL: action.payload.photoURL,
+    //   };
     case actionTypes.USER_LOGGED_OUT:
       return {
         ...state,

@@ -1,43 +1,32 @@
-import types from '../types';
-import storage from '@react-native-firebase/storage';
-import database from '@react-native-firebase/database';
+import api from '../../services/api';
+import { startLoading, stopLoading } from '../actions/application';
+import { alert } from '../../util/alert';
 
 export function sendImage(payload) {
   return async (dispatch, getState) => {
-    const refStorage = storage().ref(`${payload.fold}/image${Date.now()}`);
-    const refDatabase = database().ref(payload.fold);
-    try {
-      await refStorage.putString(payload.image, 'base64');
+    dispatch(startLoading({ msg: 'posting...' }));
 
-      const url = await refStorage.getDownloadURL();
-
-      // console.log({
-      //   user: getState().user.uid,
-      //   url: url,
-      //   caption: payload.caption,
-      // });
-
-      refDatabase.push({
-        user: {
-          uid: getState().user.uid,
-          name: getState().user.displayName,
-          photoURL: getState().user.photoURL,
-        },
-        url: url,
-        caption: payload.caption || '',
+    const url = await api.storageImage(payload.fold, payload.image);
+    if (!url) {
+      alert('error posting', 'Ok', () => {
+        payload.navigation.goBack();
       });
-
-      // database()
-      //   .ref(payload.fold)
-      //   .push({
-      //     name: 'michael',
-      //     age: 31,
-      //   })
-      //   .then(() => console.log('Data set.'));
-
-      payload.navigation.goBack();
-    } catch (error) {
-      console.log(error);
     }
+    const user = {
+      uid: getState().user.uid,
+      name: getState().user.displayName,
+      photoURL: getState().user.photoURL,
+    };
+    const post = {
+      user,
+      url: url,
+      caption: payload.caption || '',
+    };
+
+    await api.sendPostOrStory(payload.fold, post);
+
+    dispatch(stopLoading());
+
+    payload.navigation.goBack();
   };
 }

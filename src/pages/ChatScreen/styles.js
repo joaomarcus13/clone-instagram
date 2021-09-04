@@ -27,6 +27,13 @@ export const ViewProfile = styled.View`
   width: 45%;
 `;
 
+export const Content = styled.View`
+  flex: 1;
+`;
+export const Footer = styled.View`
+  height: 60px;
+`;
+
 export const Icons = {
   Back: styled(AntDesign)`
     font-size: 25px;

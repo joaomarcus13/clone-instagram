@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
@@ -7,7 +8,9 @@ import * as Styled from './styles';
 
 export default function SignUpNext({ route }) {
   // console.log(route);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+
+  const navigator = useNavigation();
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -18,7 +21,12 @@ export default function SignUpNext({ route }) {
       console.log('nome ou senha nao informados');
       return;
     }
-    dispatch(register({ email: route.params.email, name, password }));
+    navigator.navigate('SignUpAddPhotoProfile', {
+      email: route.params.email,
+      name,
+      password,
+    });
+    // dispatch(register({ email: route.params.email, name, password }));
   }
 
   return (

@@ -2,6 +2,7 @@ import React from 'react';
 
 import Login from '../pages/Login/Login';
 import SignUp from '../pages/SignUp/SignUp';
+import SignUpAddPhotoProfile from '../pages/SignUpAddPhotoProfile/SignUpAddPhotoProfile';
 
 import { enableScreens } from 'react-native-screens';
 enableScreens();
@@ -29,6 +30,13 @@ export default function MyStack() {
       <Stack.Screen
         name="SignUpNext"
         component={SignUpNext}
+        options={{
+          stackAnimation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name="SignUpAddPhotoProfile"
+        component={SignUpAddPhotoProfile}
         options={{
           stackAnimation: 'slide_from_right',
         }}

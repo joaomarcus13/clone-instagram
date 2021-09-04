@@ -16,12 +16,51 @@ export const Header = styled.View`
   /* background-color: red; */
   padding: 0 10px 0 30px;
 `;
-export const TextHeader = styled.Text`
-  width: 70%;
-  font-size: 22px;
-  font-weight: bold;
-  color: ${({ theme }) => theme.text};
-`;
+// export const TextHeader = styled.Text`
+//   width: 70%;
+//   font-size: 22px;
+//   font-weight: bold;
+//   color: ${({ theme }) => theme.text};
+// `;
+
+export const Text = {
+  Header: styled.Text`
+    width: 70%;
+    font-size: 22px;
+    font-weight: bold;
+    color: ${({ theme }) => theme.text};
+  `,
+  Profile: styled.Text`
+    color: ${({ theme }) => theme.text};
+    font-weight: bold;
+    margin: 5px 0 10px 20px;
+    text-transform: capitalize;
+  `,
+  H1: styled.Text`
+    font-size: 18px;
+    color: ${({ theme }) => theme.text};
+    font-weight: bold;
+  `,
+  H2: styled.Text`
+    /* font-size: 20px; */
+    color: ${({ theme }) => theme.text};
+  `,
+  EditProfile: styled.Text`
+    font-size: 15px;
+    color: ${({ theme }) => theme.text};
+  `,
+};
+
+export const Icons = {
+  AddPost: styled(IconFA)`
+    font-size: 26px;
+    color: ${({ theme }) => theme.icon};
+  `,
+  Menu: styled(IconS)`
+    font-size: 21px;
+    color: ${({ theme }) => theme.icon};
+  `,
+};
 
 export const IconsHeader = styled.View`
   width: 30%;
@@ -29,14 +68,14 @@ export const IconsHeader = styled.View`
   align-items: center;
   justify-content: space-around;
 `;
-export const AddPost = styled(IconFA)`
-  font-size: 26px;
-  color: ${({ theme }) => theme.icon};
-`;
-export const Menu = styled(IconS)`
-  font-size: 21px;
-  color: ${({ theme }) => theme.icon};
-`;
+// export const AddPost = styled(IconFA)`
+//   font-size: 26px;
+//   color: ${({ theme }) => theme.icon};
+// `;
+// export const Menu = styled(IconS)`
+//   font-size: 21px;
+//   color: ${({ theme }) => theme.icon};
+// `;
 
 export const Information = styled.View`
   height: 150px;
@@ -59,12 +98,12 @@ export const ImageProfile = styled.Image`
   width: 93px;
   border-radius: 50px;
 `;
-export const TextProfile = styled.Text`
-  color: ${({ theme }) => theme.text};
-  font-weight: bold;
-  margin: 5px 0 10px 20px;
-  text-transform: capitalize;
-`;
+// export const TextProfile = styled.Text`
+//   color: ${({ theme }) => theme.text};
+//   font-weight: bold;
+//   margin: 5px 0 10px 20px;
+//   text-transform: capitalize;
+// `;
 
 export const ViewNumbers = styled.View`
   width: 60%;
@@ -80,15 +119,15 @@ export const ViewEachNumbers = styled.View`
   justify-content: space-around;
 `;
 
-export const H1 = styled.Text`
-  font-size: 18px;
-  color: ${({ theme }) => theme.text};
-  font-weight: bold;
-`;
-export const H2 = styled.Text`
-  /* font-size: 20px; */
-  color: ${({ theme }) => theme.text};
-`;
+// export const H1 = styled.Text`
+//   font-size: 18px;
+//   color: ${({ theme }) => theme.text};
+//   font-weight: bold;
+// `;
+// export const H2 = styled.Text`
+//   /* font-size: 20px; */
+//   color: ${({ theme }) => theme.text};
+// `;
 
 export const ViewButton = styled.View`
   width: 100%;
@@ -119,8 +158,8 @@ export const EditProfile = styled.TouchableOpacity`
   justify-content: center;
   border: 1px solid ${({ theme }) => theme.border};
 `;
-export const TextEditProfile = styled.Text`
-  font-size: 15px;
+// export const TextEditProfile = styled.Text`
+//   font-size: 15px;
 
-  color: ${({ theme }) => theme.text};
-`;
+//   color: ${({ theme }) => theme.text};
+// `;

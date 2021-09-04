@@ -13,6 +13,7 @@ import testeImg from '../../assets/images/615340.jpg';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
+import { nameIcons } from '../../style/icons';
 import { useEffect } from 'react';
 
 const myProfile = true;
@@ -25,58 +26,72 @@ export default function Profile() {
     return email ? email.substr(0, email.indexOf('@')) : '';
   });
   const name = useSelector((state) => state.user?.displayName || '');
+  const photoURL = useSelector((state) => state.user?.photoURL);
+  console.log(photoURL);
 
   return (
     <Styled.Container>
       <Styled.Header>
-        <Styled.TextHeader>{username}</Styled.TextHeader>
+        <Styled.Text.Header>{username}</Styled.Text.Header>
         <Styled.IconsHeader>
-          <Styled.AddPost name="plus-square-o" />
+          <TouchableWithoutFeedback
+            onPress={() => {
+              navigation.navigate('NewPost');
+            }}
+          >
+            <Styled.Icons.AddPost name={nameIcons.addPost} />
+          </TouchableWithoutFeedback>
+
           <TouchableWithoutFeedback
             onPress={() => {
               navigation.toggleDrawer();
             }}
           >
-            <Styled.Menu name="menu" />
+            <Styled.Icons.Menu name="menu" />
           </TouchableWithoutFeedback>
         </Styled.IconsHeader>
       </Styled.Header>
       <Styled.Information>
         <Styled.ViewImageProfile>
-          <Styled.ImageProfile source={testeImg} />
+          {photoURL ? (
+            <Styled.ImageProfile source={{ uri: photoURL }} />
+          ) : (
+            <Styled.ImageProfile source={testeImg} />
+          )}
+
           <Styled.ViewNumbers>
             <Styled.ViewEachNumbers>
-              <Styled.H1>22</Styled.H1>
-              <Styled.H2>Posts</Styled.H2>
+              <Styled.Text.H1>22</Styled.Text.H1>
+              <Styled.Text.H2>Posts</Styled.Text.H2>
             </Styled.ViewEachNumbers>
             <Styled.ViewEachNumbers>
-              <Styled.H1>380</Styled.H1>
-              <Styled.H2>Followers</Styled.H2>
+              <Styled.Text.H1>380</Styled.Text.H1>
+              <Styled.Text.H2>Followers</Styled.Text.H2>
             </Styled.ViewEachNumbers>
             <Styled.ViewEachNumbers>
-              <Styled.H1>614</Styled.H1>
-              <Styled.H2>Following</Styled.H2>
+              <Styled.Text.H1>614</Styled.Text.H1>
+              <Styled.Text.H2>Following</Styled.Text.H2>
             </Styled.ViewEachNumbers>
           </Styled.ViewNumbers>
         </Styled.ViewImageProfile>
-        <Styled.TextProfile>{name}</Styled.TextProfile>
+        <Styled.Text.Profile>{name}</Styled.Text.Profile>
       </Styled.Information>
 
       {myProfile ? (
         <Styled.ViewButton>
           <Styled.Button bg={true}>
-            <Styled.TextEditProfile>Edit Profile</Styled.TextEditProfile>
+            <Styled.Text.EditProfile>Edit Profile</Styled.Text.EditProfile>
           </Styled.Button>
         </Styled.ViewButton>
       ) : (
         <Styled.ViewButton>
           <Styled.Button bg={following}>
-            <Styled.TextEditProfile>
+            <Styled.Text.EditProfile>
               {following ? 'following' : 'follow'}
-            </Styled.TextEditProfile>
+            </Styled.Text.EditProfile>
           </Styled.Button>
           <Styled.Button bg={true}>
-            <Styled.TextEditProfile>message</Styled.TextEditProfile>
+            <Styled.Text.EditProfile>message</Styled.Text.EditProfile>
           </Styled.Button>
         </Styled.ViewButton>
       )}

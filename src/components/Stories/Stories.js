@@ -3,12 +3,14 @@ import * as Styled from './styles';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { linearGradient } from '../../style/global';
 import imgProfile from '../../assets/icons/default-user.jpg';
-import teste from '../../assets/images/rm.jpg';
+import { photoProfileDefault } from '../../util/constants';
+
 import { useNavigation } from '@react-navigation/native';
 
 export default function Story({ data }) {
   const navigator = useNavigation();
   console.log('component sttories', data);
+  const { photoURL, name } = data[0].user;
   return (
     <Styled.Story>
       <TouchableOpacity
@@ -19,11 +21,15 @@ export default function Story({ data }) {
       >
         <Styled.Gradient colors={linearGradient}>
           <Styled.Border>
-            <Styled.StoryImg source={data[0].user.photoURL || imgProfile} />
+            <Styled.StoryImg
+              source={{
+                uri: photoURL || photoProfileDefault,
+              }}
+            />
           </Styled.Border>
         </Styled.Gradient>
       </TouchableOpacity>
-      <Styled.StoryText>{data[0].user.name}</Styled.StoryText>
+      <Styled.StoryText>{name}</Styled.StoryText>
     </Styled.Story>
   );
 }

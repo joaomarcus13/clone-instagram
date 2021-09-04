@@ -54,7 +54,11 @@ export const nameIcons = {
   close: 'close',
   next: 'arrowright',
   galery: 'ios-image-outline',
+  galery2: 'image', //Feather
+  galery3: 'file-image-o', //FontAwesome
   check: 'check',
+  mic: 'mic',
+  sticker: 'sticker-emoji', //MaterialCommunityIcons
 };
 
 export default {

@@ -10,6 +10,7 @@ const darkTheme = {
   bg: 'black',
   bgInput: '#3c3c3c',
   text: 'white',
+  modal: '#252525',
   textSecondary: '#969696',
   icon: 'white',
   iconSecondary: '#ADADAD',

@@ -2,17 +2,24 @@ import actionTypes from '../types';
 
 const initialState = {
   loading: false,
+  msg: '',
 };
 
 const reducer = (state = initialState, action) => {
-  // console.log('reducer', action.payload);
+  console.log('reducer', action.payload);
   switch (action.type) {
-    case actionTypes.LOADING:
+    case actionTypes.START_LOADING:
       return {
         ...state,
-        loading: action.payload.loading,
+        loading: true,
+        msg: action.payload.msg,
       };
-
+    case actionTypes.STOP_LOADING:
+      return {
+        ...state,
+        loading: false,
+        msg: '',
+      };
     default:
       return state;
   }

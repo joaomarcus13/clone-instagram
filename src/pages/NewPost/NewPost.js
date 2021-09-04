@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import Search from '../../components/Search/Search';
-import { data } from '../../util/datateste';
-import ListChat from '../../components/ListChat/ListChat';
+import React, { useState } from 'react';
+
 import { useNavigation } from '@react-navigation/native';
 import { nameIcons } from '../../style/icons';
-import { launchImageLibrary } from 'react-native-image-picker';
+
 import SendPost from '../../components/SendPost/SendPost';
 import * as Styled from './styles';
-import testeimg from '../../assets/images/a.jpg';
+
 import { sendImage } from '../../store/actions/post';
 import useSelectPicture from '../../hooks/useSelectPicture';
 import { useDispatch } from 'react-redux';
@@ -50,7 +37,6 @@ export default function NewPost() {
       {openCamera ? (
         <Camera
           fold={'post'}
-          // navigation={navigation}
           callback={(img) => {
             setImage(img);
             setOpenCamera(false);
@@ -124,9 +110,3 @@ export default function NewPost() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-  },
-});
