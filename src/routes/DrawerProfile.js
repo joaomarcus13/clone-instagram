@@ -17,9 +17,13 @@ function MyDrawer() {
       drawerType="slide"
       drawerPosition="right"
       overlayColor={0}
-      edgeWidth={500}
+      edgeWidth={100}
     >
-      <Drawer.Screen name="Profile" component={Profile} />
+      <Drawer.Screen
+        name="Profile"
+        component={Profile}
+        params={{ itemId: 42 }}
+      />
       <Drawer.Screen name="Settings" component={Settings} options={{}} />
     </Drawer.Navigator>
   );

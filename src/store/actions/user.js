@@ -1,7 +1,7 @@
 import actionTypes from '../types';
 import api from '../../services/api';
 import { startLoading, stopLoading } from '../actions/application';
-import { alert } from '../../util/alert';
+import { alert, getUsername } from '../../util/functions';
 
 export const loginRequest = (payload) => {
   return async (dispatch) => {
@@ -43,6 +43,7 @@ export const register = (payload) => {
           metadata: refUser.user.metadata,
           uid: refUser.user.uid,
           photoURL: url,
+          username: getUsername(refUser.email),
         })
       );
     } else {

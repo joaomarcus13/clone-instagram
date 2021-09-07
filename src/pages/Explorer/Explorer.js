@@ -102,8 +102,6 @@ function ImageExplorer({ item, index }) {
 //remover
 // const theme = themes.darkTheme;
 export default function Explorer() {
-  console.log(width);
-  console.log(height);
   const renderItem = ({ item, index }) => (
     <ImageExplorer item={item} index={index} />
   );

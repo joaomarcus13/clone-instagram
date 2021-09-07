@@ -1,33 +1,26 @@
 import React from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
 
 import * as Styled from './styles';
-import testeImg from '../../assets/images/615340.jpg';
+
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { nameIcons } from '../../style/icons';
-import { useEffect } from 'react';
+
+import NavGalleries from '../../components/NavGalleries/NavGalleries';
+import GalleryPosts from '../../components/GalleryPosts/GalleryPosts';
+import GalleryTags from '../../components/GalleryTags/GalleryTags';
+import { photoProfileDefault } from '../../util/constants';
 
 const myProfile = true;
 const following = false;
 
-export default function Profile() {
+export default function Profile(props) {
+  console.log('props', props);
   const navigation = useNavigation();
-  const username = useSelector((state) => {
-    const email = state.user?.email;
-    return email ? email.substr(0, email.indexOf('@')) : '';
-  });
+  const username = useSelector((state) => state.user.username);
   const name = useSelector((state) => state.user?.displayName || '');
   const photoURL = useSelector((state) => state.user?.photoURL);
-  console.log(photoURL);
 
   return (
     <Styled.Container>
@@ -53,11 +46,9 @@ export default function Profile() {
       </Styled.Header>
       <Styled.Information>
         <Styled.ViewImageProfile>
-          {photoURL ? (
-            <Styled.ImageProfile source={{ uri: photoURL }} />
-          ) : (
-            <Styled.ImageProfile source={testeImg} />
-          )}
+          <Styled.ImageProfile
+            source={{ uri: photoURL || photoProfileDefault }}
+          />
 
           <Styled.ViewNumbers>
             <Styled.ViewEachNumbers>
@@ -95,12 +86,19 @@ export default function Profile() {
           </Styled.Button>
         </Styled.ViewButton>
       )}
+
+      <NavGalleries
+        tabs={[
+          {
+            icon: <Styled.Icons.Posts name={nameIcons.grid} />,
+            component: <GalleryPosts />,
+          },
+          {
+            icon: <Styled.Icons.UserTag name={nameIcons.userTag} />,
+            component: <GalleryTags />,
+          },
+        ]}
+      />
     </Styled.Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-  },
-});

@@ -6,6 +6,7 @@ const initialState = {
   metadata: null,
   uid: null,
   photoURL: null,
+  username: '',
   // user: {},
 };
 

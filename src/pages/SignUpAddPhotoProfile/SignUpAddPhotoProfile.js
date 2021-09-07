@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading/Loading';
 import useSelectPicture from '../../hooks/useSelectPicture';
+import { base64 } from '../../util/functions';
 import { register } from '../../store/actions/user';
-
 import Camera from '../../components/Camera/Camera';
+import * as GStyled from '../../style/global';
 import * as Styled from './styles';
 import { launchImageLibrary } from 'react-native-image-picker';
 
@@ -104,19 +105,21 @@ export default function SignUpAddPhotoProfile({ route }) {
           )}
           <Styled.ContainerComponent>
             <Styled.ViewLogo>
-              <Styled.LogoCamera />
+              {photo || image ? (
+                <GStyled.Avatar
+                  source={{ uri: base64(photo || image) }}
+                  size={90}
+                />
+              ) : (
+                <Styled.LogoCamera />
+              )}
             </Styled.ViewLogo>
             <Styled.Text.H1>Add profile photo</Styled.Text.H1>
             <Styled.Button onPress={handleAddPhoto} activeOpacity={0.8}>
               <Styled.Text.Button>Add a Photo</Styled.Text.Button>
             </Styled.Button>
 
-            <Styled.Button
-              type="skip"
-              onPress={() => {
-                setPhoto(';;;;;');
-              }}
-            >
+            <Styled.Button type="skip" onPress={handleRegister}>
               <Styled.Text.Button type="skip">Skip</Styled.Text.Button>
             </Styled.Button>
           </Styled.ContainerComponent>

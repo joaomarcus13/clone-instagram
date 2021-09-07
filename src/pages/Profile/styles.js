@@ -1,7 +1,9 @@
 import styled from 'styled-components/native';
-import IconSearch from 'react-native-vector-icons/Ionicons';
+
+import { Animated } from 'react-native';
 import IconFA from 'react-native-vector-icons/FontAwesome';
 import IconS from 'react-native-vector-icons/SimpleLineIcons';
+import Icon from '../../style/icons';
 
 export const Container = styled.View`
   flex: 1;
@@ -60,6 +62,14 @@ export const Icons = {
     font-size: 21px;
     color: ${({ theme }) => theme.icon};
   `,
+  Posts: styled(Icon.MaterialCommunityIcons)`
+    font-size: 25px;
+    color: white;
+  `,
+  UserTag: styled(Icon.FontAwesome5)`
+    font-size: 22px;
+    color: white;
+  `,
 };
 
 export const IconsHeader = styled.View`
@@ -68,14 +78,6 @@ export const IconsHeader = styled.View`
   align-items: center;
   justify-content: space-around;
 `;
-// export const AddPost = styled(IconFA)`
-//   font-size: 26px;
-//   color: ${({ theme }) => theme.icon};
-// `;
-// export const Menu = styled(IconS)`
-//   font-size: 21px;
-//   color: ${({ theme }) => theme.icon};
-// `;
 
 export const Information = styled.View`
   height: 150px;
@@ -98,12 +100,6 @@ export const ImageProfile = styled.Image`
   width: 93px;
   border-radius: 50px;
 `;
-// export const TextProfile = styled.Text`
-//   color: ${({ theme }) => theme.text};
-//   font-weight: bold;
-//   margin: 5px 0 10px 20px;
-//   text-transform: capitalize;
-// `;
 
 export const ViewNumbers = styled.View`
   width: 60%;
@@ -118,16 +114,6 @@ export const ViewEachNumbers = styled.View`
   align-items: center;
   justify-content: space-around;
 `;
-
-// export const H1 = styled.Text`
-//   font-size: 18px;
-//   color: ${({ theme }) => theme.text};
-//   font-weight: bold;
-// `;
-// export const H2 = styled.Text`
-//   /* font-size: 20px; */
-//   color: ${({ theme }) => theme.text};
-// `;
 
 export const ViewButton = styled.View`
   width: 100%;
@@ -158,8 +144,24 @@ export const EditProfile = styled.TouchableOpacity`
   justify-content: center;
   border: 1px solid ${({ theme }) => theme.border};
 `;
-// export const TextEditProfile = styled.Text`
-//   font-size: 15px;
 
-//   color: ${({ theme }) => theme.text};
-// `;
+export const GalleriesIndicadorView = styled.View`
+  width: 100%;
+  height: 50px;
+
+  margin-top: 25px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Gallery = styled.TouchableOpacity`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`;
+
+export const Indicator = styled(Animated.View)`
+  height: 1px;
+  background-color: ${({ theme }) => theme.text};
+`;

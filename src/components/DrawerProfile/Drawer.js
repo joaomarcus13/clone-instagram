@@ -9,12 +9,15 @@ import {
   DrawerContentScrollView,
 } from '@react-navigation/drawer';
 import { nameIcons } from '../../style/icons';
+import { useSelector } from 'react-redux';
 
 export default function Drawer({ navigation }) {
+  const username = useSelector((state) => state.user.username);
+
   return (
     <Styled.Container>
       <Styled.Header>
-        <Styled.TextHeader>joamarcus13</Styled.TextHeader>
+        <Styled.TextHeader>{username}</Styled.TextHeader>
       </Styled.Header>
       <Styled.Items>
         <DrawerItem

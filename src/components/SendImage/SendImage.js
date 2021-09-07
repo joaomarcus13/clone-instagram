@@ -4,7 +4,7 @@ import { Image } from 'react-native';
 import * as Styled from './styles';
 import Loading from '../Loading/Loading';
 import testeimg from '../../assets/images/a.jpg';
-
+import { base64 } from '../../util/functions';
 import { TouchableWithoutFeedback } from 'react-native';
 import { nameIcons } from '../../style/icons';
 import { useSelector } from 'react-redux';
@@ -29,7 +29,7 @@ export default function ModalSendImage({ image, cancel, confirm }) {
         <Image
           style={{ flex: 1, resizeMode: 'cover' }}
           source={{
-            uri: `data:image/jpg;base64,${image}`,
+            uri: base64(image),
           }}
         />
         <Styled.Footer>

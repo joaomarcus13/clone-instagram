@@ -25,6 +25,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Octicons from 'react-native-vector-icons/Octicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -59,6 +60,8 @@ export const nameIcons = {
   check: 'check',
   mic: 'mic',
   sticker: 'sticker-emoji', //MaterialCommunityIcons
+  grid: 'grid', //MaterialCommunityIcons
+  userTag: 'user-tag', //FontAwesome5
 };
 
 export default {
@@ -73,4 +76,5 @@ export default {
   MaterialCommunityIcons,
   Fontisto,
   MaterialIcons,
+  FontAwesome5,
 };

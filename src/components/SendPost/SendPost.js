@@ -1,6 +1,7 @@
 import React from 'react';
 import testeimg from '../../assets/images/a.jpg';
 import Spinner from '../Loading/Loading';
+import { base64 } from '../../util/functions';
 import * as Styled from './styles';
 import * as GStyled from '../../style/global';
 import { useSelector } from 'react-redux';
@@ -22,7 +23,7 @@ export default function ModalSendPost({ image, useCaption }) {
           />
           <Styled.Image
             source={{
-              uri: `data:image/jpg;base64,${image}`,
+              uri: base64(image),
             }}
           />
         </Styled.View>

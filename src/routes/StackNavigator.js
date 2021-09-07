@@ -6,8 +6,8 @@ import NewStory from '../pages/NewStory/NewStory';
 
 import Activity from '../pages/Activity/Activity';
 import NewPost from '../pages/NewPost/NewPost';
-import { enableScreens } from 'react-native-screens';
-enableScreens();
+// import { enableScreens } from 'react-native-screens';
+// enableScreens();
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 import StackChat from './StackChat';
 import StackLogin from './StackLogin';
@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../store/actions/user';
 import auth from '@react-native-firebase/auth';
 import Stories from '../pages/Stories/Stories';
+import { getUsername } from '../util/functions';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ export default function MyStack() {
             metadata: userAuth.metadata,
             uid: userAuth.uid,
             photoURL: userAuth.photoURL,
+            username: getUsername(userAuth.email),
           })
         );
       }
@@ -57,6 +59,18 @@ export default function MyStack() {
   if (initializing) {
     return null;
   }
+
+  const config = {
+    animation: 'spring',
+    config: {
+      stiffness: 100,
+      damping: 500,
+      mass: 3,
+      overshootClamping: true,
+      restDisplacementThreshold: 0.01,
+      restSpeedThreshold: 0.01,
+    },
+  };
 
   return (
     <NavigationContainer>
@@ -87,9 +101,11 @@ export default function MyStack() {
               component={StackChat}
               options={{
                 stackAnimation: 'slide_from_right',
+                // replaceAnimation: 'push',
+
                 // transitionSpec: {
                 //   open: config,
-                //   close: closeConfig,
+                //   close: config,
                 // },
                 // gestureDirection: 'horizontal',
                 // cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,

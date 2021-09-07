@@ -1,6 +1,7 @@
 import api from '../../services/api';
+import actionTypes from '../types';
 import { startLoading, stopLoading } from '../actions/application';
-import { alert } from '../../util/alert';
+import { alert } from '../../util/functions';
 
 export function sendImage(payload) {
   return async (dispatch, getState) => {
@@ -28,5 +29,12 @@ export function sendImage(payload) {
     dispatch(stopLoading());
 
     payload.navigation.goBack();
+  };
+}
+
+export function writePostUser(payload) {
+  return {
+    type: actionTypes.WRITE_USER_POSTS,
+    payload,
   };
 }
