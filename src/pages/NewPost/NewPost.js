@@ -10,6 +10,7 @@ import { sendImage } from '../../store/actions/post';
 import useSelectPicture from '../../hooks/useSelectPicture';
 import { useDispatch } from 'react-redux';
 import Camera from '../../components/Camera/Camera';
+import { useSelector } from 'react-redux';
 
 export default function NewPost() {
   const navigation = useNavigation();

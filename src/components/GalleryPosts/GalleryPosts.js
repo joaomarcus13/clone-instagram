@@ -3,7 +3,9 @@ import { Text, View, Dimensions, FlatList, Image } from 'react-native';
 import * as Styled from './styles';
 const width = Dimensions.get('screen').width;
 import database from '@react-native-firebase/database';
+import FastImage from 'react-native-fast-image';
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 function ImagePost({ item, index }) {
   return (
@@ -13,7 +15,7 @@ function ImagePost({ item, index }) {
         flexDirection: 'row',
       }}
     >
-      <Image
+      <FastImage
         style={{
           width: width / 3,
           height: width / 3,
@@ -24,17 +26,19 @@ function ImagePost({ item, index }) {
   );
 }
 
-export default function GalleryPosts() {
+export default function GalleryPosts({ posts }) {
   const renderItem = ({ item, index }) => (
     <ImagePost item={item} index={index} />
   );
 
-  const data = useSelector((state) => state.post.userPosts);
+  // const data = useSelector((state) => state.post.userPosts);
+
+  // useEffect(() => {}, [posts]);
 
   return (
     <FlatList
       style={{ width: width }}
-      data={data}
+      data={posts}
       renderItem={renderItem}
       keyExtractor={(item) => item.url}
       numColumns={3}

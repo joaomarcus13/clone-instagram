@@ -15,7 +15,7 @@ export function sendImage(payload) {
     }
     const user = {
       uid: getState().user.uid,
-      name: getState().user.displayName,
+      name: getState().user.name,
       photoURL: getState().user.photoURL,
     };
     const post = {
@@ -24,7 +24,7 @@ export function sendImage(payload) {
       caption: payload.caption || '',
     };
 
-    await api.sendPostOrStory(payload.fold, post);
+    await api.sendPostOrStory(payload.fold, post, getState().user.uid);
 
     dispatch(stopLoading());
 
@@ -32,9 +32,27 @@ export function sendImage(payload) {
   };
 }
 
-export function writePostUser(payload) {
+export function storePosts(payload) {
   return {
-    type: actionTypes.WRITE_USER_POSTS,
+    type: actionTypes.STORE_POSTS,
     payload,
   };
 }
+export function storeStories(payload) {
+  return {
+    type: actionTypes.STORE_STORIES,
+    payload,
+  };
+}
+// export function writePostExplorer(payload) {
+//   return {
+//     type: actionTypes.WRITE_EXPLORER_POSTS,
+//     payload,
+//   };
+// }
+// export function writePostFeed(payload) {
+//   return {
+//     type: actionTypes.WRITE_FEED_POSTS,
+//     payload,
+//   };
+// }

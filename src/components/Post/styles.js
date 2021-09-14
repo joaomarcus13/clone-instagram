@@ -10,6 +10,10 @@ export const Header = styled.View`
   height: 55px;
   padding: 14px;
 `;
+export const HeaderContent = styled.TouchableOpacity`
+  flex: 1;
+  flex-direction: row;
+`;
 export const Perfil = styled.Image`
   height: 30px;
   width: 30px;

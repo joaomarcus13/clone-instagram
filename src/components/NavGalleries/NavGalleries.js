@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, cloneElement } from 'react';
 import * as Styled from './styles';
 import { ScrollView, Animated, Dimensions } from 'react-native';
 const width = Dimensions.get('screen').width;
@@ -17,7 +17,7 @@ export default function NavGalleries({ tabs }) {
 
   function handleNav(index) {
     scroll.current?.scrollTo({ x: width * index });
-    console.log(scroll.current);
+    // console.log(scroll.current);
   }
 
   return (
@@ -30,7 +30,7 @@ export default function NavGalleries({ tabs }) {
               handleNav(i);
             }}
           >
-            {e.icon}
+            {cloneElement(e.icon, { key: i.toString() })}
           </Styled.Gallery>
         ))}
       </Styled.GalleriesView>
@@ -55,7 +55,7 @@ export default function NavGalleries({ tabs }) {
           moveIndicator(contentOffset.x / tabs.length);
         }}
       >
-        {tabs.map((e) => e.component)}
+        {tabs.map((e, i) => cloneElement(e.component, { key: i.toString() }))}
       </ScrollView>
     </Styled.Container>
   );

@@ -1,7 +1,9 @@
 import storage from '@react-native-firebase/storage';
 import database from '@react-native-firebase/database';
+import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { photoProfileDefault } from '../util/constants';
+import { getUsername } from '../util/functions';
 
 async function storageImage(fold, image) {
   try {
@@ -23,10 +25,12 @@ async function createAccount(email, password, name, url) {
   try {
     refUser = await auth().createUserWithEmailAndPassword(email, password);
 
-    await refUser.user.updateProfile({
-      displayName: name,
-      photoURL: url,
-    });
+    // await refUser.user.updateProfile({
+    //   displayName: name,
+    //   photoURL: url,
+    // });
+
+    await createUser(email, name, getUsername(email), url, refUser.user.uid);
 
     console.log('User account created & signed in!', refUser.user);
     return refUser;
@@ -40,6 +44,25 @@ async function createAccount(email, password, name, url) {
     }
     console.error(error);
     return 'error creating account';
+  }
+}
+
+async function createUser(email, name, username, photoURL, uid) {
+  try {
+    const refDatabase = firestore().collection('users').doc(uid);
+    refDatabase.set({ email, name, username, photoURL });
+  } catch (error) {
+    console.log('error create user ', error);
+    throw new Error('error');
+  }
+}
+
+async function getUser(uid) {
+  try {
+    const user = await firestore().collection('users').doc(uid).get();
+    return user.data();
+  } catch (error) {
+    return {};
   }
 }
 
@@ -62,7 +85,7 @@ async function logout() {
   }
 }
 
-async function sendPostOrStory(fold, post) {
+async function sendPostOrStory(fold, post, userId) {
   try {
     const refDatabase = database().ref(fold);
     refDatabase.push(post);
@@ -71,4 +94,42 @@ async function sendPostOrStory(fold, post) {
   }
 }
 
-export default { storageImage, createAccount, login, logout, sendPostOrStory };
+async function follow(userId, followerId) {
+  try {
+    const refDatabase = firestore().collection('users').doc(userId);
+    refDatabase.update({
+      followings: firestore.FieldValue.arrayUnion(followerId),
+    });
+    const refDatabaseFollower = firestore().collection('users').doc(followerId);
+    refDatabaseFollower.update({
+      followers: firestore.FieldValue.arrayUnion(userId),
+    });
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+async function unfollow(userId, followerId) {
+  try {
+    const refDatabase = firestore().collection('users').doc(userId);
+    refDatabase.update({
+      followings: firestore.FieldValue.arrayRemove(followerId),
+    });
+    const refDatabaseFollower = firestore().collection('users').doc(followerId);
+    refDatabaseFollower.update({
+      followers: firestore.FieldValue.arrayRemove(userId),
+    });
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
+export default {
+  storageImage,
+  createAccount,
+  login,
+  logout,
+  sendPostOrStory,
+  getUser,
+  follow,
+  unfollow,
+};

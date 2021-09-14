@@ -9,7 +9,7 @@ export const Header = styled.View`
 
 export const Button = styled.TouchableOpacity`
   height: 100%;
-  margin: 0 25px;
+  margin: 0 30px 0 20px;
   align-items: center;
   justify-content: center;
 `;

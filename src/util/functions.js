@@ -7,3 +7,5 @@ export const alert = (title, btn, fn = null) => {
 export const base64 = (content) => `data:image/jpg;base64,${content}`;
 
 export const getUsername = (name) => name.substr(0, name.indexOf('@'));
+
+export const toRadians = (angle) => angle * (Math.PI / 180);

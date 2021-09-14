@@ -1361,6 +1361,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-firebase/database/-/database-12.6.0.tgz#8af6684c6846e554660659d1aa774c29fca0236f"
   integrity sha512-wRIIr62WOhbEm1d9T50V9pyBM9NTotoyt9bLg2KQh6VyggoxiwrIobtMTGFxV3dXRouAJBVbprGaAqiL/zO5eg==
 
+"@react-native-firebase/firestore@^12.7.5":
+  version "12.7.5"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/firestore/-/firestore-12.7.5.tgz#d4c23815f27c06e88c8bf96996be34ab899fc6cc"
+  integrity sha512-h/GyvPhGe60hXgE8ZNzDu7iPhqRMUbzZd4xEKP7gtr/9nVwn1orek2t5W6GTbJuJdPLrUlDX6l2g5rG+6ikpgA==
+
 "@react-native-firebase/storage@^12.6.0":
   version "12.6.0"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/storage/-/storage-12.6.0.tgz#93f19ab8e808b5bc5e8bae7f417698cd6b927e14"
@@ -6349,6 +6354,11 @@ react-native-codegen@^0.0.6:
     flow-parser "^0.121.0"
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
+
+react-native-fast-image@^8.3.7:
+  version "8.3.7"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-8.3.7.tgz#c4877de17903101f6d94b6736a4f7e5d7b019224"
+  integrity sha512-J++Ad04PTUe4YgjyGv63gfgV8Fz1gZKAgQHpblf8Z87D9dxfc8UfXHTPv9VLGdTJU4IzdTnQqzoFgDtWdsvBsQ==
 
 react-native-gesture-handler@^1.10.3:
   version "1.10.3"

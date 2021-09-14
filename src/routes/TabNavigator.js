@@ -94,7 +94,7 @@ export default function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name="DrawerProfile"
         component={Drawer}
         options={{
           tabBarIcon: ({ focused, color, size }) => (

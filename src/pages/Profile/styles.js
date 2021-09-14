@@ -4,6 +4,7 @@ import { Animated } from 'react-native';
 import IconFA from 'react-native-vector-icons/FontAwesome';
 import IconS from 'react-native-vector-icons/SimpleLineIcons';
 import Icon from '../../style/icons';
+import FastImage from 'react-native-fast-image';
 
 export const Container = styled.View`
   flex: 1;
@@ -18,12 +19,6 @@ export const Header = styled.View`
   /* background-color: red; */
   padding: 0 10px 0 30px;
 `;
-// export const TextHeader = styled.Text`
-//   width: 70%;
-//   font-size: 22px;
-//   font-weight: bold;
-//   color: ${({ theme }) => theme.text};
-// `;
 
 export const Text = {
   Header: styled.Text`
@@ -95,7 +90,7 @@ export const ViewImageProfile = styled.View`
   /* background-color: green; */
 `;
 
-export const ImageProfile = styled.Image`
+export const ImageProfile = styled(FastImage)`
   height: 93px;
   width: 93px;
   border-radius: 50px;

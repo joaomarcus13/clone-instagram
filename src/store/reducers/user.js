@@ -1,12 +1,14 @@
 import actionTypes from '../types';
 
 const initialState = {
-  displayName: '',
+  name: '',
   email: '',
   metadata: null,
   uid: null,
   photoURL: null,
   username: '',
+  followers: [],
+  followings: [],
   // user: {},
 };
 
@@ -52,11 +54,26 @@ const reducer = (state = initialState, action) => {
     case actionTypes.USER_LOGGED_OUT:
       return {
         ...state,
-        displayName: '',
+        username: '',
         email: '',
         metadata: null,
         uid: null,
         photoURL: null,
+        followers: [],
+        followings: [],
+      };
+    case actionTypes.FOLLOW:
+      return {
+        ...state,
+        followings: [...state.followings, action.payload],
+      };
+    case actionTypes.UNFOLLOW:
+      let index = state.followings.indexOf(action.payload);
+      let arr = [...state.followings];
+      arr.splice(index, 1);
+      return {
+        ...state,
+        followings: arr,
       };
     default:
       return state;

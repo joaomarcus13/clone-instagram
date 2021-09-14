@@ -1,11 +1,12 @@
 import actionTypes from '../types';
 
 const initialState = {
-  userPosts: [],
+  posts: [],
+  stories: [],
 };
 
 const reducer = (state = initialState, action) => {
-  console.log('reducer', action.payload);
+  console.log('reducer');
   switch (action.type) {
     case actionTypes.SEND_IMAGE:
       return {
@@ -15,11 +16,27 @@ const reducer = (state = initialState, action) => {
         // uid: action.payload.uid,
       };
 
-    case actionTypes.WRITE_USER_POSTS:
+    case actionTypes.STORE_POSTS:
       return {
         ...state,
-        userPosts: action.payload,
+        posts: action.payload,
       };
+    case actionTypes.STORE_STORIES:
+      return {
+        ...state,
+        stories: action.payload,
+      };
+    // case actionTypes.WRITE_FEED_POSTS:
+    //   console.log('write posts', action.payload);
+    //   return {
+    //     ...state,
+    //     feedPosts: action.payload,
+    //   };
+    // case actionTypes.WRITE_EXPLORER_POSTS:
+    //   return {
+    //     ...state,
+    //     explorerPosts: action.payload,
+    //   };
     default:
       return state;
   }

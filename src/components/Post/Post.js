@@ -1,25 +1,41 @@
+import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Image, Dimensions } from 'react-native';
-import imgProfile from '../../assets/icons/default-user.jpg';
+import { StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
+import FastImage from 'react-native-fast-image';
+import { photoProfileDefault } from '../../util/constants';
 import * as Styled from './styles';
 
 export default function Post({ data }) {
+  const navigation = useNavigation();
   return (
-    <Styled.Container style={styles.container}>
-      <Styled.Header style={styles.header}>
+    <Styled.Container>
+      <Styled.Header>
         <Styled.Perfil
-          source={data.user.photoURL || imgProfile}
-          style={styles.perfil}
+          source={{ uri: data.user.photoURL || photoProfileDefault }}
         />
-        <Styled.Text.Flex style={styles.authorName}>
-          {data.user.name}
-        </Styled.Text.Flex>
-        <Styled.Icons.Dots name="more-vertical" />
+        <Styled.HeaderContent
+          onPress={() => {
+            navigation.navigate('Profile', { profileId: data.user.uid });
+          }}
+          activeOpacity={1}
+        >
+          <Styled.Text.Flex>{data.user.name}</Styled.Text.Flex>
+          <Styled.Icons.Dots name="more-vertical" />
+        </Styled.HeaderContent>
       </Styled.Header>
 
-      <Image source={{ uri: data.url }} style={styles.image} />
+      {/* <Image source={{ uri: data.url }} style={styles.image} /> */}
+      <FastImage
+        style={styles.image}
+        source={{
+          uri: data.url,
+          // headers: { Authorization: 'someAuthToken' },
+          priority: FastImage.priority.normal,
+        }}
+        resizeMode={FastImage.resizeMode.contain}
+      />
 
-      <Styled.AreaIcons style={styles.areaIcons}>
+      <Styled.AreaIcons>
         <Styled.Icons.Like name="hearto" />
         <Styled.Icons.Comment
           name="message-circle"
@@ -38,7 +54,7 @@ export default function Post({ data }) {
 
         <Styled.Text.H3>View all 21 comments</Styled.Text.H3>
 
-        <Styled.AddComment style={styles.addComment}>
+        <Styled.AddComment>
           <Styled.Perfil source={data.img} />
           <Styled.Input placeholder="Add a comment..." />
         </Styled.AddComment>

@@ -21,7 +21,8 @@ import {
 import themes from './src/style/themes';
 
 ////////////
-import MainRoutes from './src/routes/StackNavigator';
+import MainRoutes from './src/routes';
+// import MainRoutes from './src/routes/StackNavigator';
 // import MainRoutes from './src/routes/TabNavigator';
 // import MainRoutes from './src/routes/DrawerFeed';
 import { Provider } from 'react-redux';

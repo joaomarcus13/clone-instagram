@@ -1,152 +1,113 @@
-import React, { useEffect, useRef, Platform } from 'react';
-import {
-  FlatList,
-  View,
-  Image,
-  ScrollView,
-  Dimensions,
-  Animated,
-} from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Dimensions, Platform } from 'react-native';
+import { toRadians } from '../../util/functions';
 import Carousel, { getInputRangeFromIndexes } from 'react-native-snap-carousel';
-
+import NavStories from '../../components/NavStories/NavStories';
 import * as Styled from './styles';
 import * as GStyled from '../../style/global';
+import { useSelector } from 'react-redux';
 const width = Dimensions.get('screen').width;
-const height = Dimensions.get('screen').height;
+const POSITION = Platform.OS === 'ios' ? 2 : 1.5;
+const ZOOM = Math.sin(toRadians(65));
+const MARGIN25 = (width - 320) / 31.3 + 7;
+const MARGIN50 = (width - 320) / 23.5 + 13;
+const MARGIN100 = (width - 320) / 47 + 5;
 
-function Story({ data }) {
-  // console.log(data.url);
+function ImageStory({ story, refCarousel }) {
+  const [index, setIndex] = useState(0);
+
   return (
-    // <ScrollView>
-    <Image
-      source={{ uri: data.url }}
-      style={{ height: height, width: width, resizeMode: 'center' }}
-    />
-    // </ScrollView>
+    <Styled.ContainerImage>
+      <NavStories
+        index={index}
+        setIndex={setIndex}
+        story={story}
+        refCarousel={refCarousel}
+      />
+      <Styled.Image
+        style={{ resizeMode: 'cover' }}
+        source={{ uri: story[index].url }}
+      />
+    </Styled.ContainerImage>
   );
 }
-const PESPECTIVE = 1.7;
-const TR_POSITION = 1.5;
 
 export default function Stories({ route }) {
-  const { data } = route.params;
-  const renderStory = ({ item }) => <Story data={item} />;
+  const refScroll = useRef(null);
+  const renderStory = ({ item }) => (
+    <ImageStory story={item} refCarousel={refScroll} />
+  );
 
-  const _scrollInterpolator = (index, carouselProps) => {
+  const [index, setIndex] = useState(route.params.index);
+
+  const stories = useSelector((state) => state.post.stories);
+
+  const _scrollInterpolator = (idx, carouselProps) => {
     const range = [1, 0, -1];
-    const inputRange = getInputRangeFromIndexes(range, index, carouselProps);
+    const inputRange = getInputRangeFromIndexes(range, idx, carouselProps);
     const outputRange = range;
 
     return { inputRange, outputRange };
   };
 
   const _animatedStyles = (i, scrollX, carouselProps) => {
-    let pageX = 0;
-
-    let opacity = scrollX.interpolate({
-      inputRange: [
-        (pageX - width) / width,
-        (pageX - width + 10) / width,
-        pageX / width,
-        (pageX + width - 250) / width,
-        (pageX + width) / width,
-      ],
-      outputRange: [0, 0.6, 1, 0.6, 0],
-      extrapolate: 'clamp',
-    });
-
     return {
       transform: [
         {
-          perspective: width,
+          perspective: 2 * width,
         },
         {
           translateX: scrollX.interpolate({
-            inputRange: [
-              pageX - width,
-              pageX - width + 0.1,
-              pageX,
-              pageX + width - 0.1,
-              pageX + width,
-            ],
-            outputRange: [
-              -width - 1,
-              (-width - 1) / PESPECTIVE,
-              0,
-              (width + 1) / PESPECTIVE,
-              +width + 1,
-            ],
+            inputRange: [-1, 0, 1],
+            outputRange: [width / POSITION, 0, -width / POSITION],
           }),
         },
         {
           rotateY: scrollX.interpolate({
             inputRange: [-1, 0, 1],
-            outputRange: ['-60deg', '0deg', '60deg'],
-            extrapolate: 'clamp',
+            outputRange: ['-90deg', '0deg', '90deg'],
           }),
         },
-        // {
-        //   translateX: scrollX.interpolate({
-        //     inputRange: [
-        //       (pageX - width) / width,
-        //       (pageX - width + 0.1) / width,
-        //       pageX / width,
-        //       (pageX + width - 0.1) / width,
-        //       (pageX + width) / width,
-        //     ],
-        //     outputRange: [
-        //       -width - 1,
-        //       (-width - 1) / PESPECTIVE,
-        //       0,
-        //       (width + 1) / PESPECTIVE,
-        //       +width + 1,
-        //     ],
-        //     extrapolate: 'clamp',
-        //   }),
-        // },
+        {
+          scale: scrollX.interpolate({
+            inputRange: [-1, -0.5, 0, 0.5, 1],
+            outputRange: [1, ZOOM, 1, ZOOM, 1],
+          }),
+        },
+        {
+          translateX: scrollX.interpolate({
+            inputRange: [-1, -0.75, -0.5, 0, 0.5, 0.75, 1],
+            outputRange: [
+              -width / POSITION + MARGIN100,
+              (-width * ZOOM * 0.75) / POSITION + MARGIN25,
+              (-width * ZOOM * 0.5) / POSITION + MARGIN50,
+              0,
+              (width * ZOOM * 0.5) / POSITION - MARGIN50,
+              (width * ZOOM * 0.75) / POSITION - MARGIN25,
+              width / POSITION - MARGIN100,
+            ],
+          }),
+        },
       ],
-      opacity: opacity,
+      opacity: scrollX.interpolate({
+        inputRange: [-1, -0.5, 0.5, 1],
+        outputRange: [0.4, 1, 1, 0.4],
+      }),
     };
   };
 
   return (
     <GStyled.Container>
-      {/* <FlatList
-        data={data}
-        renderItem={renderStory}
-        keyExtractor={(item) => item.url}
-        horizontal={true}
-        showsVerticalScrollIndicator={false}
-      /> */}
-      {/* <ScrollView
-        horizontal={true}
-        style={{ flex: 1 }}
-        showsHorizontalScrollIndicator={false}
-        pagingEnabled
-        onScroll={Animated.event(
-          [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-          { useNativeDriver: false }
-        )}
-        scrollEventThrottle={16}
-      >
-        {data.map((e) => (
-          <Animated.View key={e.url}>
-            <Image
-              source={{ uri: e.url }}
-              style={{ height: height, width: width, resizeMode: 'center' }}
-            />
-          </Animated.View>
-        ))}
-      </ScrollView> */}
       <Carousel
-        // layout={'tinder'}
+        ref={refScroll}
         scrollInterpolator={_scrollInterpolator}
         slideInterpolatedStyle={_animatedStyles}
-        // ref={this.carouselRef}
-        data={data}
+        itemWidth={width}
+        firstItem={index}
+        keyExtractor={(item) => item[0].url}
+        data={stories}
         renderItem={renderStory}
         sliderWidth={width}
-        itemWidth={width}
       />
     </GStyled.Container>
   );
