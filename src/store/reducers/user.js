@@ -8,7 +8,7 @@ const initialState = {
   photoURL: null,
   username: '',
   followers: [],
-  followings: [],
+  following: [],
   // user: {},
 };
 
@@ -60,20 +60,20 @@ const reducer = (state = initialState, action) => {
         uid: null,
         photoURL: null,
         followers: [],
-        followings: [],
+        following: [],
       };
     case actionTypes.FOLLOW:
       return {
         ...state,
-        followings: [...state.followings, action.payload],
+        following: [...state.following, action.payload],
       };
     case actionTypes.UNFOLLOW:
-      let index = state.followings.indexOf(action.payload);
-      let arr = [...state.followings];
+      let index = state.following.indexOf(action.payload);
+      let arr = [...state.following];
       arr.splice(index, 1);
       return {
         ...state,
-        followings: arr,
+        following: arr,
       };
     default:
       return state;

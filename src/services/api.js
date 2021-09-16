@@ -98,7 +98,7 @@ async function follow(userId, followerId) {
   try {
     const refDatabase = firestore().collection('users').doc(userId);
     refDatabase.update({
-      followings: firestore.FieldValue.arrayUnion(followerId),
+      following: firestore.FieldValue.arrayUnion(followerId),
     });
     const refDatabaseFollower = firestore().collection('users').doc(followerId);
     refDatabaseFollower.update({
@@ -112,7 +112,7 @@ async function unfollow(userId, followerId) {
   try {
     const refDatabase = firestore().collection('users').doc(userId);
     refDatabase.update({
-      followings: firestore.FieldValue.arrayRemove(followerId),
+      following: firestore.FieldValue.arrayRemove(followerId),
     });
     const refDatabaseFollower = firestore().collection('users').doc(followerId);
     refDatabaseFollower.update({

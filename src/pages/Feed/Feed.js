@@ -18,28 +18,15 @@ import { useDispatch } from 'react-redux';
 function ScrollStories() {
   const renderStory = ({ item, index }) => <Story data={item} index={index} />;
 
-  const [stories, setStories] = useState([]);
-  const dispatch = useDispatch();
+  const { following, uid } = useSelector((state) => state.user);
+  const stories = useSelector((state) => {
+    return state.post.stories.filter(
+      (story) =>
+        story[0].user.uid === following.find((e) => e === story[0].user.uid) ||
+        story[0].user.uid === uid
+    );
+  });
 
-  useEffect(() => {
-    const unsubscribe = database()
-      .ref('stories')
-      .on('value', (snapshot) => {
-        const data = {};
-        if (snapshot.exists()) {
-          // const stories = snapshot.val()
-          for (let i of Object.values(snapshot.val())) {
-            data.hasOwnProperty(i.user.uid)
-              ? data[i.user.uid].push(i)
-              : (data[i.user.uid] = [i]);
-          }
-          setStories(Object.values(data));
-          dispatch(storeStories(Object.values(data)));
-          console.log(Object.values(data));
-        }
-      });
-    return () => database().ref('stories').off('value', unsubscribe);
-  }, []);
   return (
     <SafeAreaView>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -61,28 +48,15 @@ function ScrollStories() {
 
 export default function Feed() {
   const renderPost = ({ item }) => <Post data={item} />;
-  // const uidUser = useSelector((state) => state.user.uid);
-  // const dispatch = useDispatch();
-  const posts = useSelector((state) => state.post.posts);
 
-  // const [posts, setPosts] = useState([]);
-
-  // useEffect(() => {
-  //   const unsubscribe = database()
-  //     .ref('posts')
-  //     .on('value', (snapshot) => {
-  //       // console.log('User data: ', snapshot.val());
-  //       if (snapshot.exists()) {
-  //         const postsData = Object.values(snapshot.val());
-  //         setPosts(postsData);
-  //         const userPosts = postsData.filter((p) => p.user.uid === uidUser);
-  //         dispatch(writePostUser(userPosts));
-  //       }
-  //     });
-  //   return () => database().ref('posts').off('value', unsubscribe);
-  // }, []);
-
-  // console.log(posts);
+  const { following, uid } = useSelector((state) => state.user);
+  const posts = useSelector((state) => {
+    return state.post.posts.filter(
+      (post) =>
+        post.user.uid === following.find((e) => e === post.user.uid) ||
+        post.user.uid === uid
+    );
+  });
 
   return (
     <Container>

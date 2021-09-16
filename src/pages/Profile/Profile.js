@@ -23,10 +23,10 @@ export default function Profile({ route }) {
   // console.log('props', route);
 
   let myProfile = true;
-  let following = false;
+  let isFollow = false;
   const profileId = route?.params?.profileId || null;
   const navigation = useNavigation();
-  const { uid, username, name, photoURL, followings, followers } = useSelector(
+  const { uid, username, name, photoURL, following, followers } = useSelector(
     (state) => state.user
   );
   if (profileId) {
@@ -40,10 +40,10 @@ export default function Profile({ route }) {
   });
   const dispatch = useDispatch();
 
-  following = followings.includes(profileId);
+  isFollow = following.includes(profileId);
 
   function handleFollow() {
-    following
+    isFollow
       ? dispatch(unfollow({ uid, profileId }))
       : dispatch(follow({ uid, profileId }));
   }
@@ -117,8 +117,8 @@ export default function Profile({ route }) {
                 <Styled.ViewEachNumbers>
                   <Styled.Text.H1>
                     {myProfile
-                      ? followings.length || '0'
-                      : profileUser.followings?.length || '0'}
+                      ? following.length || '0'
+                      : profileUser.following?.length || '0'}
                   </Styled.Text.H1>
                   <Styled.Text.H2>Following</Styled.Text.H2>
                 </Styled.ViewEachNumbers>
@@ -137,9 +137,9 @@ export default function Profile({ route }) {
             </Styled.ViewButton>
           ) : (
             <Styled.ViewButton>
-              <Styled.Button bg={following} onPress={handleFollow}>
+              <Styled.Button bg={isFollow} onPress={handleFollow}>
                 <Styled.Text.EditProfile>
-                  {following ? 'following' : 'follow'}
+                  {isFollow ? 'following' : 'follow'}
                 </Styled.Text.EditProfile>
               </Styled.Button>
               <Styled.Button bg={true}>

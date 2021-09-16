@@ -2,11 +2,15 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
+import { useSelector } from 'react-redux';
 import { photoProfileDefault } from '../../util/constants';
 import * as Styled from './styles';
 
 export default function Post({ data }) {
   const navigation = useNavigation();
+
+  const photoURL = useSelector((state) => state.user.photoURL);
+
   return (
     <Styled.Container>
       <Styled.Header>
@@ -55,7 +59,7 @@ export default function Post({ data }) {
         <Styled.Text.H3>View all 21 comments</Styled.Text.H3>
 
         <Styled.AddComment>
-          <Styled.Perfil source={data.img} />
+          <Styled.Perfil source={{ uri: photoURL }} />
           <Styled.Input placeholder="Add a comment..." />
         </Styled.AddComment>
 

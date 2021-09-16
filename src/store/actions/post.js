@@ -21,6 +21,7 @@ export function sendImage(payload) {
     const post = {
       user,
       url: url,
+      createdAt: new Date(),
       caption: payload.caption || '',
     };
 
