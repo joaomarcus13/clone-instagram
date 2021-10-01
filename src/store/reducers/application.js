@@ -3,6 +3,7 @@ import actionTypes from '../types';
 const initialState = {
   loading: false,
   msg: '',
+  darkTheme: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +20,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         loading: false,
         msg: '',
+      };
+    case actionTypes.TOGGLE_THEME:
+      return {
+        ...state,
+        darkTheme: !state.darkTheme,
       };
     default:
       return state;

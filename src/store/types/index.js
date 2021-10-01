@@ -14,4 +14,6 @@ export default {
 
   FOLLOW: 'FOLLOW',
   UNFOLLOW: 'UNFOLLOW',
+
+  TOGGLE_THEME: 'TOGGLE_THEME',
 };

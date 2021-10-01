@@ -7,8 +7,8 @@ export const Container = styled.View`
   justify-content: space-around;
   padding: 8px 5.5px;
   /* padding: 1% 0.8%; */
-  border-bottom-color: ${({ theme }) => theme.borderSecondary};
-  border-bottom-width: 0.3px;
+  /* border-bottom-color: ${({ theme }) => theme.borderSecondary}; */
+  /* border-bottom-width: 0.3px; */
 `;
 export const Image = styled.Image`
   width: 65px;

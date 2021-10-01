@@ -5,14 +5,17 @@ export const Container = styled.View`
   align-items: center;
   justify-content: center;
 `;
-export const Input = styled.TextInput`
+export const Input = styled.TextInput.attrs({
+  placeholderTextColor: '#ADADAD',
+  selectionColor: 'gray',
+})`
   width: 90%;
   /* height: 35px; */
   padding: 4px;
   border-radius: 10px;
   padding-left: 45px;
   font-size: 16px;
-  background-color: ${({ theme }) => theme.borderSecondary};
+  background-color: ${({ theme }) => theme.bgInput};
   position: relative;
 `;
 

@@ -61,7 +61,7 @@ export const Icons = {
     font-size: 28px;
   `,
   Next: styled(Icon.AntDesign)`
-    color: #0095f6;
+    color: ${({ theme }) => theme.blueCheck};
     font-size: 28px;
   `,
   Galery: styled(Icon.Ionicons)`
@@ -74,7 +74,7 @@ export const Icons = {
   `,
   Check: styled(Icon.Feather)`
     font-size: 26px;
-    color: #0095f6;
+    color: ${({ theme }) => theme.blueCheck};
   `,
 };
 

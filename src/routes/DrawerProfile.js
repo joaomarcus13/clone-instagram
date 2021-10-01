@@ -3,6 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import DrawerContent from '../components/DrawerProfile/Drawer';
 import Profile from '../pages/Profile/Profile';
 import Settings from '../pages/Settings/Settings';
+import StackSettings from './StackSettings';
 
 const Drawer = createDrawerNavigator();
 
@@ -24,7 +25,11 @@ function MyDrawer() {
         component={Profile}
         params={{ itemId: 42 }}
       />
-      <Drawer.Screen name="Settings" component={Settings} options={{}} />
+      <Drawer.Screen
+        name="StackSettings"
+        component={StackSettings}
+        options={{}}
+      />
     </Drawer.Navigator>
   );
 }

@@ -4,20 +4,31 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import { NavigationContainer } from '@react-navigation/native';
 import Feed from '../pages/Feed/Feed';
 import Explorer from '../pages/Explorer/Explorer';
-// import Profile from '../pages/Profile/Profile';
-// import IconHome from 'react-native-vector-icons/Foundation';
+
 import IconSearch from 'react-native-vector-icons/Ionicons';
-// import IconShop from 'react-native-vector-icons/MaterialCommunityIcons';
+import { icons } from '../style/icons';
+
+import searchP from '../assets/icon/Search.png';
+import SearchS from '../assets/icon/Search.svg';
+// import Reels from '../assets/icon/reels.svg';
+
 import IconShop from 'react-native-vector-icons/MaterialCommunityIcons';
 import iconReels from '../assets/icons/icons-reels.png';
 import testeperfil from '../assets/images/a.jpg';
 import Drawer from './DrawerProfile';
 // import Drawer2 from './DrawerFeed';
-import Icons from '../style/icons';
+// import Icons from '../style/icons';
+import { useSelector } from 'react-redux';
+import { ThemeContext } from 'styled-components/native';
+import { useContext } from 'react';
 
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
+  const themeContext = useContext(ThemeContext);
+  // console.log(themeContext);
+  const photoURL = useSelector((state) => state.user.photoURL);
+  const { Search, Reels, Bag } = icons[themeContext.name];
   return (
     // <NavigationContainer>
     <Tab.Navigator
@@ -25,10 +36,10 @@ export default function Tabs() {
         showLabel: false,
         keyboardHidesTabBar: true,
         style: {
-          backgroundColor: 'black',
-          borderTopColor: 'black',
+          backgroundColor: themeContext.bg,
+          borderTopColor: themeContext.borderSecondary,
         },
-        activeTintColor: 'white',
+        activeTintColor: themeContext.bg,
       }}
     >
       <Tab.Screen
@@ -36,13 +47,11 @@ export default function Tabs() {
         component={Feed}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            // <IconHome name="home" color={'white'} size={focused ? 29 : 28} />
-            <Icons.Foundation
-              name="home"
-              color={'white'}
-              size={focused ? 29 : 28}
+            <Image
+              style={{ width: 22, height: 22 }}
+              source={icons[themeContext.name].home}
             />
-            // <Icons.home />
+            // <Home />
           ),
         }}
       />
@@ -52,11 +61,12 @@ export default function Tabs() {
         component={Explorer}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-            <IconSearch
-              name={focused ? 'ios-search' : 'ios-search-outline'}
-              color="white"
-              size={28}
-            />
+            // <IconSearch
+            //   name={focused ? 'ios-search' : 'ios-search-outline'}
+            //   color="white"
+            //   size={28}
+            // />
+            <Search />
           ),
         }}
       />
@@ -64,33 +74,14 @@ export default function Tabs() {
         name="Reels"
         component={Feed}
         options={{
-          tabBarIcon: ({ focused, color, size }) => (
-            <View
-              style={{
-                backgroundColor: 'white',
-                height: 24,
-                width: 24,
-                borderRadius: 7,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Image source={iconReels} style={{ height: 25, width: 25 }} />
-            </View>
-          ),
+          tabBarIcon: ({ focused, color, size }) => <Reels />,
         }}
       />
       <Tab.Screen
         name="Store"
         component={Explorer}
         options={{
-          tabBarIcon: ({ focused, color, size }) => (
-            <IconShop
-              name={focused ? 'shopping' : 'shopping-outline'}
-              color="white"
-              size={28}
-            />
-          ),
+          tabBarIcon: ({ focused, color, size }) => <Bag />,
         }}
       />
       <Tab.Screen
@@ -99,8 +90,8 @@ export default function Tabs() {
         options={{
           tabBarIcon: ({ focused, color, size }) => (
             <Image
-              source={testeperfil}
-              style={{ height: 30, width: 30, borderRadius: 50 }}
+              source={{ uri: photoURL }}
+              style={{ height: 28, width: 28, borderRadius: 50 }}
             />
           ),
         }}

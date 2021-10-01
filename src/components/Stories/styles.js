@@ -14,8 +14,8 @@ export const Story = styled.View`
   justify-content: space-around;
   /* padding: 10% 1%; */
   padding: 8px 5.5px;
-  border-bottom-color: ${({ theme }) => theme.borderSecondary};
-  border-bottom-width: 0.3px;
+  /* border-bottom-color: ${({ theme }) => theme.borderSecondary}; */
+  /* border-bottom-width: 0.3px; */
 `;
 export const StoryImg = styled.Image`
   width: 65px;

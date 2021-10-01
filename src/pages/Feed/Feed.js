@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { FlatList, SafeAreaView, ScrollView, View } from 'react-native';
 import { Container } from './styles';
 import Header from '../../components/Header/Header';
-
+import PostList from '../../components/PostList/PostList';
 // import themes from '../../style/themes';
-import Post from '../../components/Post/Post';
+
 import Story from '../../components/Stories/Stories';
 import AddStory from '../../components/AddStory/AddStory';
 
@@ -14,6 +14,7 @@ import database from '@react-native-firebase/database';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import * as Styled from './styles';
 
 function ScrollStories() {
   const renderStory = ({ item, index }) => <Story data={item} index={index} />;
@@ -28,8 +29,12 @@ function ScrollStories() {
   });
 
   return (
-    <SafeAreaView>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+    <View>
+      <Styled.ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={{}}
+      >
         <AddStory />
 
         <View style={{ flexDirection: 'row' }}>
@@ -41,14 +46,12 @@ function ScrollStories() {
             horizontal
           />
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </Styled.ScrollView>
+    </View>
   );
 }
 
 export default function Feed() {
-  const renderPost = ({ item }) => <Post data={item} />;
-
   const { following, uid } = useSelector((state) => state.user);
   const posts = useSelector((state) => {
     return state.post.posts.filter(
@@ -66,15 +69,16 @@ export default function Feed() {
         {/* <View> */}
         {/* <View> */}
         <ScrollStories />
+        <PostList posts={posts} />
         {/* </View> */}
-        <View>
+        {/* <View>
           <FlatList
             data={posts}
             renderItem={renderPost}
             keyExtractor={(item, index) => index.toString()}
             showsVerticalScrollIndicator={false}
           />
-        </View>
+        </View> */}
         {/* </View> */}
       </ScrollView>
     </Container>

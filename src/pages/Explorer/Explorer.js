@@ -8,6 +8,7 @@ import {
   View,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import Search from '../../components/Search/Search';
 import FastImage from 'react-native-fast-image';
@@ -17,9 +18,16 @@ import * as Styled from './styles';
 
 import { useSelector } from 'react-redux';
 
-function ImageExplorer({ item }) {
+import { useNavigation } from '@react-navigation/native';
+
+function ImageExplorer({ item, index }) {
+  const navigation = useNavigation();
+  function handlePostViewer() {
+    navigation.navigate('PostViewer', { index, textHeader: 'Explore' });
+  }
   return (
-    <View
+    <TouchableOpacity
+      onPress={handlePostViewer}
       style={{
         margin: 1,
         flexDirection: 'row',
@@ -32,12 +40,14 @@ function ImageExplorer({ item }) {
         }}
         source={{ uri: item.url }}
       />
-    </View>
+    </TouchableOpacity>
   );
 }
 
 export default function Explorer() {
-  const renderItem = ({ item }) => <ImageExplorer item={item} />;
+  const renderItem = ({ item, index }) => (
+    <ImageExplorer item={item} index={index} />
+  );
 
   const posts = useSelector((state) => state.post.posts);
 

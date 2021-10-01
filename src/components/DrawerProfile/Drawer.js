@@ -79,7 +79,7 @@ export default function Drawer({ navigation }) {
           )}
           labelStyle={styles.label}
           onPress={() => {
-            navigation.navigate('Settings');
+            navigation.navigate('StackSettings');
           }}
         />
       </Styled.Footer>

@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import Icon from '../../style/icons';
+import { icons } from '../../style/icons';
 
 export const Container = styled.View`
   flex: 1;
@@ -26,6 +27,12 @@ export const AreaIcons = styled.View`
   /* background-color: red; */
   align-items: center;
   padding: 8px 14px;
+`;
+export const IconsLeft = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 35%;
 `;
 export const Icons = {
   Dots: styled(Icon.Feather)`

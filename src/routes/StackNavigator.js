@@ -13,20 +13,14 @@ import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 import StackChat from './StackChat';
 import database from '@react-native-firebase/database';
 import Stories from '../pages/Stories/Stories';
-import { useDispatch, useSelector } from 'react-redux';
-import {
-  storePosts,
-  storeStories,
-  getPosts,
-  getStories,
-} from '../store/actions/post';
+import { useDispatch } from 'react-redux';
+import { storePosts, storeStories } from '../store/actions/post';
 import Profile from '../pages/Profile/Profile';
+import PostViewer from '../pages/PostViewer/PostViewer';
 
 const Stack = createNativeStackNavigator();
 
 export default function MyStack() {
-  const uidUser = useSelector((state) => state.user.uid);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -110,6 +104,13 @@ export default function MyStack() {
         component={Profile}
         options={{
           stackAnimation: 'slide_from_right',
+        }}
+      />
+      <Stack.Screen
+        name="PostViewer"
+        component={PostViewer}
+        options={{
+          stackAnimation: 'none',
         }}
       />
     </Stack.Navigator>

@@ -34,6 +34,7 @@ export default function Profile({ route }) {
   }
   const [profileUser, setProfileUser] = useState({});
   const userPosts = useSelector((state) => {
+    ///////dispatch userPosts
     return profileId
       ? state.post.posts.filter((p) => p.user.uid === profileId)
       : state.post.posts.filter((p) => p.user.uid === uid);
@@ -50,7 +51,6 @@ export default function Profile({ route }) {
 
   const getUser = useCallback(async () => {
     const userProfile = await api.getUser(profileId);
-
     setProfileUser(userProfile);
   }, [profileId]);
 
@@ -152,7 +152,9 @@ export default function Profile({ route }) {
             tabs={[
               {
                 icon: <Styled.Icons.Posts name={nameIcons.grid} />,
-                component: <GalleryPosts posts={userPosts} />,
+                component: (
+                  <GalleryPosts posts={userPosts} userId={profileId || uid} />
+                ),
               },
               {
                 icon: <Styled.Icons.UserTag name={nameIcons.userTag} />,

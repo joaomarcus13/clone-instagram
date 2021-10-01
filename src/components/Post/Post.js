@@ -1,14 +1,20 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { StyleSheet, Image, Dimensions, TouchableOpacity } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import { useSelector } from 'react-redux';
 import { photoProfileDefault } from '../../util/constants';
+// import Heart from '../../assets/iconTest/Heart - Outline.svg';
+// import Comment from '../../assets/iconTest/Comment - Outline.svg';
+// import Direct from '../../assets/iconTest/Direct.svg';
 import * as Styled from './styles';
+import { ThemeContext } from 'styled-components';
+import { icons } from '../../style/icons';
 
 export default function Post({ data }) {
   const navigation = useNavigation();
-
+  const themeContext = useContext(ThemeContext);
+  const { Heart, Comment, Direct } = icons[themeContext.name];
   const photoURL = useSelector((state) => state.user.photoURL);
 
   return (
@@ -40,12 +46,18 @@ export default function Post({ data }) {
       />
 
       <Styled.AreaIcons>
-        <Styled.Icons.Like name="hearto" />
-        <Styled.Icons.Comment
+        <Styled.IconsLeft>
+          <Heart />
+          {/* <Styled.Icons.Like name="hearto" /> */}
+          {/* <Styled.Icons.Comment
           name="message-circle"
           style={{ transform: [{ rotate: '270deg' }] }}
-        />
-        <Styled.Icons.Share name="send" />
+        /> */}
+          {/* <Image source={comment} style={{ width: 20, height: 20 }} /> */}
+          <Comment />
+          {/* <Styled.Icons.Share name="send" /> */}
+          <Direct />
+        </Styled.IconsLeft>
         <Styled.Icons.BookMark name="bookmark-o" />
       </Styled.AreaIcons>
 

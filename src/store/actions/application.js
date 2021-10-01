@@ -11,3 +11,9 @@ export const stopLoading = (payload) => {
     type: actionTypes.STOP_LOADING,
   };
 };
+
+export const toggleTheme = (payload) => {
+  return {
+    type: actionTypes.TOGGLE_THEME,
+  };
+};
